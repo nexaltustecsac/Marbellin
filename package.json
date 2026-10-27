@@ -1,0 +1,8 @@
+{
+  "name": "marbellin-storefront",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {"dev": "vite", "build": "vite build"},
+  "devDependencies": {"vite": "^6.0.0", "concurrently": "^9.0.0"}
+}
