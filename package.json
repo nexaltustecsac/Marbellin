@@ -1,8 +1,17 @@
 {
-  "name": "marbellin-storefront",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {"dev": "vite", "build": "vite build"},
-  "devDependencies": {"vite": "^6.0.0", "concurrently": "^9.0.0"}
+    "private": true,
+    "type": "module",
+    "packageManager": "pnpm@11.7.0",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "axios": "^1.8.2",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.2.0",
+        "tailwindcss": "^4.0.0",
+        "vite": "^6.2.4"
+    }
 }

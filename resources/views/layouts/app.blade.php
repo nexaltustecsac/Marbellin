@@ -1,22 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title', 'Marbellin | Lencería fina')</title>
-<meta name="description" content="@yield('description', 'Lencería Marbellin: comodidad, suavidad y estilo para ti.')">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('css/marbellin.css') }}">
-<script defer src="{{ asset('js/marbellin.js') }}"></script>
-@stack('head')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Marbellin: lencería fina, cómoda y elegante para comprar en línea.">
+    <title>@yield('title', config('app.name', 'Marbellin'))</title>
+
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/e424d20747.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+
+    @stack('styles')
 </head>
+
 <body>
-<div class="topbar">MARBELLIN · LENCERÍA FINA · ENVÍOS A TODO EL PERÚ</div>
-<header class="header"><a class="logo" href="{{ route('home') }}">marbellin<span>.</span></a><button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button><nav class="nav"><a href="{{ route('home') }}">Inicio</a><a href="{{ route('products.index') }}">Productos</a><a href="{{ route('pages.nosotros') }}">Nosotros</a><a href="{{ route('pages.contacto') }}">Contacto</a></nav><div class="header-actions"><a href="{{ route('auth.login') }}">Ingresar</a><a href="{{ route('cart.checkout') }}">Carrito <span class="cart-count" data-cart-count>0</span></a></div></header>
-@if(session('success'))<div class="notice success" role="status">{{ session('success') }}</div>@endif
-@if(session('error'))<div class="notice error" role="alert">{{ session('error') }}</div>@endif
-@if($errors->any())<div class="notice error" role="alert">@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif
-<main>@yield('content')</main>
-<footer class="footer"><a class="logo" href="{{ route('home') }}">marbellin<span>.</span></a><p>Lencería fina, pensada para ti.</p><div class="footer-links"><a href="{{ route('pages.privacy') }}">Privacidad</a><a href="{{ route('pages.terms') }}">Términos</a><a href="{{ route('pages.returns') }}">Cambios y devoluciones</a><a href="{{ route('pages.faq') }}">Preguntas frecuentes</a></div><small>© {{ date('Y') }} Marbellin. Todos los derechos reservados.</small></footer>
-@stack('scripts')
-</body></html>
+    {{-- Navbar --}}
+    @if (Request::is('admin*'))
+    @include('components.navAdmin')
+    @elseif (!Request::is('acceso*'))
+    @include('components.navbar')
+    @endif
+
+    <main>
+        @yield('content')
+    </main>
+
+    {{-- Footer --}}
+    @if (!Request::is('admin*') && !Request::is('acceso*'))
+    @include('components.footer')
+    @endif
+
+    @include('sweetalert::alert')
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @stack('scripts')
+</body>
+
+</html>
