@@ -88,6 +88,40 @@ create table if not exists public.claims (
   created_at timestamptz not null default now()
 );
 
+
+-- Catálogo inicial Marbellin. Puede ejecutarse más de una vez sin duplicar códigos.
+insert into public.products
+  (product_code, name, slug, category, description, price, price_unit, stock, active)
+values
+  (1025, 'Cachetero Dije', 'cachetero-dije', 'Cachetero', 'Un diseño delicado para tu día a día.', 57.00, 57.00, 10, true),
+  (1052, 'Cachetero Dije Estampado', 'cachetero-dije-estampado', 'Cachetero', 'Un toque estampado con estilo.', 64.00, 64.00, 10, true),
+  (1027, 'Cachetero Corazón', 'cachetero-corazon', 'Cachetero', 'Detalle romántico y femenino.', 65.00, 65.00, 10, true),
+  (1072, 'Cachetero Corazón Estampado', 'cachetero-corazon-estampado', 'Cachetero', 'Color y detalles para destacar.', 70.00, 70.00, 10, true),
+  (1029, 'Cachetero Blonda', 'cachetero-blonda', 'Cachetero', 'Acabado de blonda delicado.', 64.00, 64.00, 10, true),
+  (1028, 'Cachetero Blonda con Logo', 'cachetero-blonda-logo', 'Cachetero', 'Diseño con detalle de marca.', 70.00, 70.00, 10, true),
+  (1048, 'Semi Señorial Juvenil', 'semi-senorial-juvenil', 'Semi hilo', 'Un estilo juvenil y elegante.', 73.00, 73.00, 10, true),
+  (1049, 'Señorial Floreado', 'senorial-floreado', 'Semi hilo', 'Estampado floral delicado.', 76.00, 76.00, 10, true),
+  (1050, 'Encaje Atrás', 'encaje-atras', 'Semi hilo', 'Detalles de encaje en la parte posterior.', 70.00, 70.00, 10, true),
+  (1022, 'Bikini Clásico', 'bikini-clasico', 'Bikini', 'Un básico versátil y cómodo.', 56.00, 56.00, 10, true),
+  (1020, 'Bikini Animal Print', 'bikini-animal-print', 'Bikini', 'Estampado animal print.', 61.00, 61.00, 10, true),
+  (1019, 'Bikini Estrella', 'bikini-estrella', 'Bikini', 'Un detalle inspirado en estrellas.', 63.00, 63.00, 10, true),
+  (1024, 'Bikini Blonda', 'bikini-blonda', 'Bikini', 'Blonda con un acabado delicado.', 58.00, 58.00, 10, true),
+  (1033, 'Bikini Pretina Ancha', 'bikini-pretina-ancha', 'Bikini', 'Pretina ancha para un ajuste cómodo.', 62.00, 62.00, 10, true),
+  (1034, 'Bikini Blondita Completa', 'bikini-blondita-completa', 'Bikini', 'Diseño con detalles de blonda.', 65.00, 65.00, 10, true),
+  (1026, 'Semi Hilo Clásico', 'semi-hilo-clasico', 'Semi hilo', 'Un modelo sencillo y versátil.', 54.00, 54.00, 10, true),
+  (1031, 'Semi Hilo Dije', 'semi-hilo-dije', 'Semi hilo', 'Pequeño detalle decorativo.', 55.00, 55.00, 10, true),
+  (1032, 'Semi Hilo Pretina Ancha', 'semi-hilo-pretina-ancha', 'Semi hilo', 'Pretina ancha y estilo moderno.', 59.00, 59.00, 10, true),
+  (1003, 'Topsito Olímpico', 'topsito-olimpico', 'Top', 'Top de estilo olímpico.', 67.00, 67.00, 10, true),
+  (1002, 'Topsito Tirante', 'topsito-tirante', 'Top', 'Top con tirantes para combinar.', 67.00, 67.00, 10, true)
+on conflict (product_code) do update set
+  name = excluded.name,
+  slug = excluded.slug,
+  category = excluded.category,
+  description = excluded.description,
+  price = excluded.price,
+  price_unit = excluded.price_unit,
+  active = excluded.active;
+
 create or replace function public.is_marbellin_admin()
 returns boolean language sql stable security definer set search_path = ''
 as $$
@@ -98,7 +132,7 @@ as $$
 $$;
 
 revoke all on function public.is_marbellin_admin() from public;
-grant execute on function public.is_marbellin_admin() to authenticated;
+grant execute on function public.is_marbellin_admin() to anon, authenticated;
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = ''
