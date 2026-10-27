@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('title','Crear cuenta | Marbellin')
+@section('content')
+<section class="auth-wrap"><form class="form-card" method="POST" action="{{ route('auth.register.submit') }}">@csrf<p class="eyebrow">BIENVENIDA A MARBELLIN</p><h1>Crea tu cuenta</h1><label>Nombre completo<input name="name" value="{{ old('name') }}" autocomplete="name" required></label><label>Correo electrónico<input type="email" name="email" value="{{ old('email') }}" autocomplete="email" required></label><label>Contraseña<input type="password" name="password" minlength="6" autocomplete="new-password" required></label><label>Repite la contraseña<input type="password" name="password_confirmation" minlength="6" autocomplete="new-password" required></label><button class="button full" type="submit">Crear cuenta</button><p class="form-foot">¿Ya tienes cuenta? <a href="{{ route('auth.login') }}">Inicia sesión</a></p></form></section>
+@endsection

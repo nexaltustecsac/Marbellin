@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('title','Resumen del pedido | Marbellin')
+@section('content')
+<section class="page-heading"><p class="eyebrow">PEDIDO REGISTRADO</p><h1>¡Gracias por tu compra!</h1><p>Tu número de pedido es <strong>#{{ $order->id }}</strong>. Guarda este número para cualquier consulta.</p></section><section class="summary-card"><h2>Resumen del pedido</h2><p><strong>Cliente:</strong> {{ $order->customer_name }}</p><p><strong>Entrega:</strong> {{ $order->shipping_address }}, {{ $order->district }}</p><p><strong>Pago:</strong> {{ $order->payment_method }}</p><div class="table-wrap"><table><thead><tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr></thead><tbody>@foreach($order->items as $item)<tr><td>{{ $item->product->name ?? 'Producto' }}</td><td>{{ $item->quantity }}</td><td>S/ {{ number_format($item->price,2) }}</td></tr>@endforeach</tbody></table></div><p>Subtotal: S/ {{ number_format($order->subtotal,2) }}</p><p>Envío: S/ {{ number_format($order->shipping_cost,2) }}</p><h2>Total: S/ {{ number_format($order->total,2) }}</h2><a class="button" href="{{ route('home') }}">Volver al inicio</a></section>
+@endsection
+@push('scripts')<script>localStorage.removeItem('marbellin-cart');</script>@endpush
