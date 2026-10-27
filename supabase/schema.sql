@@ -127,13 +127,14 @@ drop policy if exists "Profiles: read own or admin" on public.profiles;
 create policy "Profiles: read own or admin" on public.profiles
 for select to authenticated using (id = (select auth.uid()) or public.is_marbellin_admin());
 
--- Los clientes no pueden modificar el campo role desde el cliente.
--- El rol de administrador se asigna exclusivamente desde el SQL Editor.
+-- No se permite actualizar perfiles desde el cliente normal.
+-- El rol de administrador se asigna exclusivamente desde SQL Editor.
 drop policy if exists "Profiles: update own non-role fields" on public.profiles;
-create policy "Profiles: update own non-role fields" on public.profiles
+drop policy if exists "Profiles: admins update" on public.profiles;
+create policy "Profiles: admins update" on public.profiles
 for update to authenticated
-using (id = (select auth.uid()) or public.is_marbellin_admin())
-with check (id = (select auth.uid()) or public.is_marbellin_admin());
+using (public.is_marbellin_admin())
+with check (public.is_marbellin_admin());
 
 drop policy if exists "Products: public reads active products" on public.products;
 create policy "Products: public reads active products" on public.products
@@ -199,7 +200,7 @@ for update to authenticated using (public.is_marbellin_admin())
 with check (public.is_marbellin_admin());
 
 grant select on public.products to anon, authenticated;
-grant select, insert, update on public.profiles to authenticated;
+grant select, update on public.profiles to authenticated;
 grant select, insert, update on public.orders to authenticated;
 grant select, insert on public.order_items to authenticated;
 grant insert on public.contact_messages to anon, authenticated;
