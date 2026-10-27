@@ -1,10 +1,10 @@
 <?php
 
-namespace App\\Http\\Controllers;
+namespace App\Http\Controllers;
 
-use App\\Models\\Claim;
-use App\\Models\\ContactMessage;
-use Illuminate\\Http\\Request;
+use App\Models\Claim;
+use App\Models\ContactMessage;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {

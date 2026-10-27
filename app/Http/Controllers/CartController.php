@@ -1,11 +1,11 @@
 <?php
 
-namespace App\\Http\\Controllers;
+namespace App\Http\Controllers;
 
-use App\\Models\\Order;
-use App\\Models\\OrderItem;
-use Illuminate\\Http\\Request;
-use Illuminate\\Support\\Facades\\DB;
+use App\Models\Order;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -58,7 +58,7 @@ class CartController extends Controller
             DB::commit();
             session()->forget('checkout_data');
             return redirect()->route('cart.resumen', $order->id)->with('clear_cart', true);
-        } catch (\\Throwable $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             report($e);
             return back()->with('error', 'No se pudo procesar el pedido. Revisa los datos e inténtalo nuevamente.');
