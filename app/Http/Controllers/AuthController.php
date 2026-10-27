@@ -15,7 +15,7 @@ class AuthController extends Controller
         $credentials = $request->validate(['email' => 'required|email', 'password' => 'required']);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return Auth::user()->email === 'admin@lencerianora.com'
+            return Auth::user()->email === env('MARBELLIN_ADMIN_EMAIL')
                 ? redirect()->route('admin.dashboard')
                 : redirect()->route('auth.profile');
         }
