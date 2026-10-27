@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('title','Contacto | Marbellin')
+@section('content')
+<section class="page-heading"><p class="eyebrow">ESTAMOS PARA AYUDARTE</p><h1>Hablemos</h1><p>Envíanos tu consulta y nuestro equipo se pondrá en contacto contigo.</p></section><section class="auth-wrap"><form class="form-card" method="POST" action="{{ route('pages.contacto.send') }}">@csrf<label>Nombre completo<input name="name" value="{{ old('name') }}" required maxlength="255"></label><label>Correo electrónico<input type="email" name="email" value="{{ old('email') }}" required></label><label>Teléfono (opcional)<input name="phone" type="tel" value="{{ old('phone') }}"></label><label>Mensaje<textarea name="message" rows="5" required>{{ old('message') }}</textarea></label><button class="button full" type="submit">Enviar mensaje</button></form></section>
+@endsection
