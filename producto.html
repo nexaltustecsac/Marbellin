@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4c6d2">
+  <title>Productos | Marbellin</title>
+  <style>
+    :root{--pink:#c6537b;--pale:#fff0f5;--soft:#f4c6d2;--ink:#3f3036;--line:#f0d5df}
+    *{box-sizing:border-box}
+    body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+    header{padding:18px 6%;background:var(--pale);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+    .brand{font-weight:800;letter-spacing:2px;color:var(--pink);font-size:1.5rem;text-decoration:none}
+    nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:var(--ink);text-decoration:none;font-weight:600}
+    .wrap{max-width:1180px;margin:auto;padding:34px 5% 60px}
+    .intro{text-align:center;padding:18px 0 28px}.eyebrow{color:var(--pink);font-size:.78rem;font-weight:bold;letter-spacing:2px;text-transform:uppercase}
+    h1{font-size:clamp(2rem,5vw,3.2rem);margin:10px 0}.intro p{color:#74646b;line-height:1.6}
+    .tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:20px 0}
+    input,select{font:inherit;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;color:var(--ink);min-height:44px}
+    #search{flex:1;min-width:190px}.count{font-size:.9rem;color:#74646b}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    .product{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s}
+    .product:hover{transform:translateY(-3px);box-shadow:0 12px 30px #6b334011}
+    .visual{min-height:165px;display:grid;place-items:center;background:linear-gradient(145deg,#fff0f5,#f9dce5);font-size:3.6rem;color:var(--pink)}
+    .info{padding:16px;display:flex;flex-direction:column;gap:9px;flex:1}
+    .category{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--pink);font-weight:bold}
+    h2{font-size:1.02rem;margin:0}.desc{font-size:.88rem;line-height:1.5;color:#74646b;margin:0;flex:1}
+    .price{font-size:1.2rem;font-weight:800}.sizes{font-size:.82rem;color:#74646b}
+    .add{margin-top:4px;padding:12px;border:0;border-radius:12px;background:var(--pink);color:#fff;font-weight:bold;font-size:.95rem;cursor:pointer}
+    .add:hover{filter:brightness(.95)}.empty{grid-column:1/-1;text-align:center;padding:35px;color:#74646b}
+    .cartline{position:sticky;bottom:12px;margin:24px auto 0;max-width:460px;background:#3f3036;color:white;border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 24px #0002}
+    footer{text-align:center;background:#3f3036;color:white;padding:22px}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){header{justify-content:center}nav{justify-content:center}.grid{grid-template-columns:1fr 1fr;gap:10px}.visual{min-height:125px;font-size:2.7rem}.info{padding:12px}.wrap{padding-left:4%;padding-right:4%}.tools{align-items:stretch}select{flex:1}}
+    @media(max-width:360px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html">MARBELLIN</a>
+    <nav aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="producto.html">Productos</a><a href="#catalogo">Colección</a></nav>
+  </header>
+  <main class="wrap" id="catalogo">
+    <section class="intro">
+      <div class="eyebrow">Marbellin Ladies Lingerie</div>
+      <h1>Nuestra colección</h1>
+      <p>Encuentra tu estilo favorito. Filtra por categoría o busca el modelo que tienes en mente.</p>
+    </section>
+    <div class="tools">
+      <input id="search" type="search" placeholder="Buscar producto..." aria-label="Buscar producto">
+      <select id="category" aria-label="Filtrar por categoría">
+        <option value="Todos">Todas las categorías</option><option value="Cachetero">Cacheteros</option><option value="Bikini">Bikinis</option><option value="Semi hilo">Semi hilo</option><option value="Top">Tops</option>
+      </select>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <section class="grid" id="products" aria-label="Lista de productos"></section>
+    <div class="cartline"><span>🛍️ Carrito: <strong id="cart-count">0</strong> producto(s)</span><span>Total: <strong id="cart-total">S/ 0.00</strong></span></div>
+  </main>
+  <footer>© <span id="year"></span> Marbellin · Lencería para sentirte bien</footer>
+  <script>
+    const products = [
+      {id:1025,name:"Cachetero Dije",category:"Cachetero",price:57,desc:"Un diseño delicado para tu día a día.",emoji:"♡"},
+      {id:1052,name:"Cachetero Dije Estampado",category:"Cachetero",price:64,desc:"Un toque estampado con estilo.",emoji:"✿"},
+      {id:1027,name:"Cachetero Corazón",category:"Cachetero",price:65,desc:"Detalle romántico y femenino.",emoji:"♥"},
+      {id:1072,name:"Cachetero Corazón Estampado",category:"Cachetero",price:70,desc:"Color y detalles para destacar.",emoji:"❀"},
+      {id:1029,name:"Cachetero Blonda",category:"Cachetero",price:64,desc:"Acabado de blonda delicado.",emoji:"✧"},
+      {id:1028,name:"Cachetero Blonda con Logo",category:"Cachetero",price:70,desc:"Diseño con detalle de marca.",emoji:"♡"},
+      {id:1048,name:"Semi Señorial Juvenil",category:"Semi hilo",price:73,desc:"Un estilo juvenil y elegante.",emoji:"✿"},
+      {id:1049,name:"Señorial Floreado",category:"Semi hilo",price:76,desc:"Estampado floral delicado.",emoji:"❀"},
+      {id:1050,name:"Encaje Atrás",category:"Semi hilo",price:70,desc:"Detalles de encaje en la parte posterior.",emoji:"✧"},
+      {id:1022,name:"Bikini Clásico",category:"Bikini",price:56,desc:"Un básico versátil y cómodo.",emoji:"♡"},
+      {id:1020,name:"Bikini Animal Print",category:"Bikini",price:61,desc:"Estampado animal print.",emoji:"✿"},
+      {id:1019,name:"Bikini Estrella",category:"Bikini",price:63,desc:"Un detalle inspirado en estrellas.",emoji:"✦"},
+      {id:1024,name:"Bikini Blonda",category:"Bikini",price:58,desc:"Blonda con un acabado delicado.",emoji:"✧"},
+      {id:1033,name:"Bikini Pretina Ancha",category:"Bikini",price:62,desc:"Pretina ancha para un ajuste cómodo.",emoji:"♡"},
+      {id:1034,name:"Bikini Blondita Completa",category:"Bikini",price:65,desc:"Diseño con detalles de blonda.",emoji:"❀"},
+      {id:1026,name:"Semi Hilo Clásico",category:"Semi hilo",price:54,desc:"Un modelo sencillo y versátil.",emoji:"♡"},
+      {id:1031,name:"Semi Hilo Dije",category:"Semi hilo",price:55,desc:"Pequeño detalle decorativo.",emoji:"✧"},
+      {id:1032,name:"Semi Hilo Pretina Ancha",category:"Semi hilo",price:59,desc:"Pretina ancha y estilo moderno.",emoji:"♡"},
+      {id:1003,name:"Topsito Olímpico",category:"Top",price:67,desc:"Top de estilo olímpico.",emoji:"✿"},
+      {id:1002,name:"Topsito Tirante",category:"Top",price:67,desc:"Top con tirantes para combinar.",emoji:"♡"}
+    ];
+    const money = n => "S/ " + n.toFixed(2);
+    const cart = JSON.parse(localStorage.getItem("carritoMarbellin") || "[]");
+    const productsEl = document.getElementById("products");
+    function render(){
+      const q=document.getElementById("search").value.trim().toLowerCase();
+      const cat=document.getElementById("category").value;
+      const list=products.filter(p=>(cat==="Todos"||p.category===cat)&&(p.name.toLowerCase().includes(q)||String(p.id).includes(q)));
+      document.getElementById("count").textContent=list.length+" modelo(s)";
+      productsEl.innerHTML=list.length?list.map(p=>`<article class="product"><div class="visual" aria-hidden="true">${p.emoji}</div><div class="info"><span class="category">${p.category} · Código ${p.id}</span><h2>${p.name}</h2><p class="desc">${p.desc}</p><div class="price">${money(p.price)}</div><div class="sizes">Tallas sujetas a disponibilidad: S, M, L, XL</div><button class="add" data-id="${p.id}">Agregar al carrito</button></div></article>`).join(""):'<p class="empty">No encontramos productos con esa búsqueda.</p>';
+      document.getElementById("cart-count").textContent=cart.reduce((n,p)=>n+p.qty,0);
+      document.getElementById("cart-total").textContent=money(cart.reduce((n,p)=>n+p.price*p.qty,0));
+    }
+    productsEl.addEventListener("click",e=>{
+      const btn=e.target.closest("button[data-id]");if(!btn)return;
+      const p=products.find(x=>x.id===Number(btn.dataset.id));const existing=cart.find(x=>x.id===p.id);
+      if(existing)existing.qty++;else cart.push({id:p.id,name:p.name,price:p.price,qty:1});
+      localStorage.setItem("carritoMarbellin",JSON.stringify(cart));render();
+      btn.textContent="¡Agregado!";setTimeout(()=>{if(btn.isConnected)btn.textContent="Agregar al carrito"},1000);
+    });
+    document.getElementById("search").addEventListener("input",render);
+    document.getElementById("category").addEventListener("change",render);
+    document.getElementById("year").textContent=new Date().getFullYear();
+    render();
+  </script>
+</body>
+</html>
