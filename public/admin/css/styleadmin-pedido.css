@@ -1,0 +1,3 @@
+/* Marbellin · estilos compartidos. Hoja especializada styleadmin-pedido */
+@import url("../../css/marbellin.css");
+.page-transition{animation:marbellin-enter .25s ease-out}@keyframes marbellin-enter{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}

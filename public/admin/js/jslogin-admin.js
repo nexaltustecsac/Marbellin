@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{const form=document.querySelector('[data-admin-login]');if(form)form.addEventListener('submit',()=>{const button=form.querySelector('button[type=submit]');if(button){button.disabled=true;button.textContent='Validando…';}});});

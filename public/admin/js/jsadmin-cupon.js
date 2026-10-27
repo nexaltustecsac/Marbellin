@@ -1,0 +1,1 @@
+document.addEventListener('submit',e=>{const form=e.target.closest('[data-coupon-form]');if(!form)return;e.preventDefault();const code=new FormData(form).get('code');const out=form.querySelector('[data-form-message]');if(out)out.textContent=code?'Cupón validado localmente. La activación requiere conexión con el servidor.':'Escribe un código de cupón.';});

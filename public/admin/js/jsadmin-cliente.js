@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-client-search]').forEach(input=>input.addEventListener('input',()=>{const term=input.value.trim().toLocaleLowerCase('es');document.querySelectorAll('[data-client-row]').forEach(row=>row.hidden=!row.textContent.toLocaleLowerCase('es').includes(term));}));});
