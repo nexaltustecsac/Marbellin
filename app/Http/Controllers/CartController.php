@@ -104,6 +104,7 @@ class CartController extends Controller
 
             DB::commit();
             session()->forget('checkout_data');
+            session(['last_order_id' => $order->id]);
             return redirect()->route('cart.resumen', $order->id)->with('clear_cart', true);
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -115,6 +116,7 @@ class CartController extends Controller
     public function resumen($id)
     {
         $order = Order::with('items.product')->findOrFail($id);
+        abort_unless((int) session('last_order_id') === (int) $order->id, 403);
         return view('pages.cart.resumen', compact('order'));
     }
 }
