@@ -57,8 +57,10 @@
     <div class="cartline"><span>🛍️ Carrito: <strong id="cart-count">0</strong> producto(s)</span><span>Total: <strong id="cart-total">S/ 0.00</strong></span></div>
   </main>
   <footer>© <span id="year"></span> Marbellin · Lencería para sentirte bien</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script>
-    const products = [
+    const fallbackProducts = [
       {id:1025,name:"Cachetero Dije",category:"Cachetero",price:57,desc:"Un diseño delicado para tu día a día.",emoji:"♡"},
       {id:1052,name:"Cachetero Dije Estampado",category:"Cachetero",price:64,desc:"Un toque estampado con estilo.",emoji:"✿"},
       {id:1027,name:"Cachetero Corazón",category:"Cachetero",price:65,desc:"Detalle romántico y femenino.",emoji:"♥"},
@@ -80,6 +82,49 @@
       {id:1003,name:"Topsito Olímpico",category:"Top",price:67,desc:"Top de estilo olímpico.",emoji:"✿"},
       {id:1002,name:"Topsito Tirante",category:"Top",price:67,desc:"Top con tirantes para combinar.",emoji:"♡"}
     ];
+    let products = fallbackProducts;
+    let supabaseClient = null;
+    try {
+      supabaseClient = window.createMarbellinSupabaseClient ? window.createMarbellinSupabaseClient() : null;
+    } catch (error) {
+      console.warn("Supabase no está configurado; se usará el catálogo local.", error);
+    }
+
+    function normalizeCategory(value) {
+      const text = String(value || "").toLowerCase();
+      if (text.includes("cachetero")) return "Cachetero";
+      if (text.includes("bikini")) return "Bikini";
+      if (text.includes("semi")) return "Semi hilo";
+      if (text.includes("top")) return "Top";
+      return value || "Otros";
+    }
+
+    async function loadProductsFromSupabase() {
+      if (!supabaseClient) return;
+      try {
+        const { data, error } = await supabaseClient
+          .from("products")
+          .select("id,product_code,name,category,price,price_unit,description,active")
+          .eq("active", true)
+          .order("product_code", { ascending: true });
+        if (error) throw error;
+        if (Array.isArray(data) && data.length) {
+          products = data.map((row, index) => ({
+            id: Number(row.product_code || row.id || index + 1),
+            name: row.name || "Producto Marbellin",
+            category: normalizeCategory(row.category),
+            price: Number(row.price_unit ?? row.price ?? 0),
+            desc: row.description || "Diseño Marbellin.",
+            emoji: "♡"
+          }));
+          render();
+          document.getElementById("count").title = "Catálogo cargado desde Supabase";
+        }
+      } catch (error) {
+        console.warn("No se pudo leer el catálogo de Supabase. Se conserva el catálogo local.", error);
+      }
+    }
+
     const money = n => "S/ " + n.toFixed(2);
     const cart = JSON.parse(localStorage.getItem("carritoMarbellin") || "[]");
     const productsEl = document.getElementById("products");
@@ -103,6 +148,7 @@
     document.getElementById("category").addEventListener("change",render);
     document.getElementById("year").textContent=new Date().getFullYear();
     render();
+    loadProductsFromSupabase();
   </script>
 </body>
 </html>
