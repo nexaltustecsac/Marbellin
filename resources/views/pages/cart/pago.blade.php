@@ -1,6 +1,0 @@
-@extends('layouts.app')
-@section('title','Pago | Marbellin')
-@section('content')
-<section class="auth-wrap"><form class="form-card" method="POST" action="{{ route('cart.process') }}">@csrf<p class="eyebrow">ÚLTIMO PASO</p><h1>Forma de pago</h1><p>Elige cómo deseas pagar tu pedido. La confirmación del pago deberá verificarse antes del despacho.</p><label class="radio-row"><input type="radio" name="payment_method" value="Transferencia" checked> Transferencia bancaria</label><label class="radio-row"><input type="radio" name="payment_method" value="Yape"> Yape (confirmación manual)</label><label class="radio-row"><input type="radio" name="payment_method" value="Contraentrega"> Contraentrega (sujeto a cobertura)</label><input type="hidden" name="cart_items" id="cart-items-json"><button class="button full" type="submit">Confirmar pedido</button></form></section>
-@push('scripts')<script>document.addEventListener('DOMContentLoaded',()=>{const i=document.getElementById('cart-items-json');if(i)i.value=JSON.stringify(JSON.parse(localStorage.getItem('marbellin-cart')||'[]'));});</script>@endpush
-@endsection

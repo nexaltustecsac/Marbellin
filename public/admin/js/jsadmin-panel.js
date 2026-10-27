@@ -1,1 +1,0 @@
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-panel-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-panel-tab]').forEach(b=>b.setAttribute('aria-selected',String(b===btn)));document.querySelectorAll('[data-panel-section]').forEach(s=>s.hidden=s.dataset.panelSection!==btn.dataset.panelTab);}));});

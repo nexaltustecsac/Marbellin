@@ -1,6 +1,0 @@
-@extends('layouts.app')
-@section('title',$product->name.' | Marbellin')
-@section('content')
-<section class="detail"><div class="detail-image product-placeholder">♡</div><div class="detail-copy"><p class="eyebrow">{{ ucfirst($product->category) }}</p><h1>{{ $product->name }}</h1><p class="detail-price">S/ {{ number_format($product->price_unit ?? $product->price,2) }}</p><p>{{ $product->description ?: 'Una prenda Marbellin diseñada para ofrecer comodidad y estilo.' }}</p><p class="muted">Disponibilidad sujeta a stock.</p><button class="button" data-add-cart data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->price_unit ?? $product->price }}">Añadir al carrito</button><a class="text-link back-link" href="{{ route('products.index') }}">← Volver a productos</a></div></section>
-@if($relatedProducts->isNotEmpty())<section class="section"><h2>También te puede gustar</h2><div class="product-grid">@foreach($relatedProducts as $related)<article class="product-card"><a href="{{ route('products.show',$related->id) }}"><div class="product-placeholder">♡</div><div class="product-info"><h3>{{ $related->name }}</h3><strong>S/ {{ number_format($related->price_unit ?? $related->price,2) }}</strong></div></a></article>@endforeach</div></section>@endif
-@endsection

@@ -1,1 +1,0 @@
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-search-form]').forEach(form=>form.addEventListener('submit',e=>{const field=form.querySelector('input[type=search],input[name=buscar]');if(field&&!field.value.trim()){e.preventDefault();field.focus();}}));});

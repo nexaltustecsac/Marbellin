@@ -1,1 +1,0 @@
-document.addEventListener('submit',e=>{const form=e.target.closest('[data-order-lookup]');if(!form)return;e.preventDefault();const out=form.querySelector('[data-form-message]');if(out)out.textContent='Para consultar el estado real, conecta este formulario a la base de datos de pedidos.';});

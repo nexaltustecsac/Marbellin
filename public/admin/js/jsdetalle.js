@@ -1,1 +1,0 @@
-document.addEventListener('click',e=>{const btn=e.target.closest('[data-quantity-change]');if(!btn)return;const field=document.querySelector('[data-quantity]');if(!field)return;const n=Number(field.value)||1;field.value=Math.max(1,Math.min(99,n+Number(btn.dataset.quantityChange)));});

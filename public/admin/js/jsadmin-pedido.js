@@ -1,1 +1,0 @@
-document.addEventListener('input',e=>{const input=e.target.closest('[data-order-filter]');if(!input)return;const term=input.value.toLocaleLowerCase('es');document.querySelectorAll('[data-order-row]').forEach(row=>row.hidden=!row.textContent.toLocaleLowerCase('es').includes(term));});

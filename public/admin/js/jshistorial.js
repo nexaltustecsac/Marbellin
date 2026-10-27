@@ -1,1 +1,0 @@
-document.addEventListener('input',e=>{const filter=e.target.closest('[data-history-search]');if(!filter)return;const q=filter.value.toLocaleLowerCase('es');document.querySelectorAll('[data-history-row]').forEach(row=>row.hidden=!row.textContent.toLocaleLowerCase('es').includes(q));});

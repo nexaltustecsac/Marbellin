@@ -1,1 +1,0 @@
-document.addEventListener('click',e=>{const btn=e.target.closest('[data-print-invoice]');if(btn){window.print();}});

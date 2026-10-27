@@ -1,3 +1,0 @@
-/* Marbellin · estilos compartidos. Hoja especializada stylecarritodetalle */
-@import url("../../css/marbellin.css");
-.admin-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.admin-toolbar button{cursor:pointer}
