@@ -6,7 +6,7 @@
  * En Vercel, este archivo se sirve al navegador: solo usa la publishable key.
  */
 window.MARBELLIN_SUPABASE_URL = "https://ckgvgfpcxeqyilfphnsu.supabase.co";
-window.MARBELLIN_SUPABASE_ANON_KEY = "PEGA_AQUI_TU_SUPABASE_PUBLISHABLE_KEY";
+window.MARBELLIN_SUPABASE_ANON_KEY = "sb_publishable_XLQDJByokKbI5m0UVkJHEw_KRTygH9M";
 
 window.createMarbellinSupabaseClient = function () {
   if (!window.supabase || !window.supabase.createClient) {
