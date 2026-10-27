@@ -18,7 +18,7 @@ class AdminController extends Controller
         $credentials = $request->validate(['email' => 'required|email', 'password' => 'required|string']);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if (Auth::user()->email === 'admin@lencerianora.com') {
+            if (Auth::user()->email === env('MARBELLIN_ADMIN_EMAIL')) {
                 return redirect()->route('admin.dashboard');
             }
             Auth::logout();
@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        abort_unless(Auth::check() && Auth::user()->email === 'admin@lencerianora.com', 403);
+        abort_unless(Auth::check() && Auth::user()->email === env('MARBELLIN_ADMIN_EMAIL'), 403);
         return view('admin.dashboard', [
             'productsCount' => Product::count(),
             'ordersCount' => Order::count(),
