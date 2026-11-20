@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/base/reset.css">
+  <link rel="stylesheet" href="../css/base/variable.css">
+  <link rel="stylesheet" href="../css/layout/footer.css">
+  <link rel="stylesheet" href="../css/layout/header.css">
+   <link rel="stylesheet" href="../css/layout/headerbusqueda.css">
+  <link rel="stylesheet" href="../css/layout/headercarrito.css">
+  <link rel="stylesheet" href="../css/layout/headerhamburgesa.css">
+  <link rel="stylesheet" href="../css/layout/whatsapp.css">
+  <link rel="stylesheet" href="../css/preguntasfrecuentes.css">
+  <link rel="stylesheet" href="../css/usuario.css">
+  <title>Marbellín Lencería - Productos</title>
+</head>
+
+<body>
+  <header>
+<nav>
+    <div class="fila-superior">
+      <!-- Logo -->
+      <a href="../index.html">
+        <img id="logo" src="../assets/icons/logo-marbellin.png" alt="Logo de Marbellín Lencería">
+      </a>
+
+      <!-- Buscador -->
+<div class="buscador">
+  <input type="text" placeholder="Buscar producto..." autocomplete="off" />
+  <button class="boton-buscar" aria-label="Buscar">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+
+      <!-- Iconos (Carrito y Usuario) -->
+          <div class="iconos">
+     <!-- Carrito -->
+<div class="contenedor-carrito-hover">
+ 
+    <a href="javascript:void(0)" id="abrir-carrito">
+        <i class="fas fa-shopping-cart icono-carrito"></i>
+    </a>
+
+    <div class="mini-carrito" id="mini-carrito">
+      
+      <button class="cerrar-carrito" id="cerrar-carrito">&times;</button>
+
+        <h3 class="titulo-carrito">Mi Carrito</h3>
+     
+        <ul class="lista-carrito"></ul>
+
+        <div class="subtotal-general" id="subtotal-general">
+            <strong>Subtotal:</strong> S/. 0.00
+        </div>
+
+         <div class="acciones-carrito">
+            <button class="btn-ver-carrito">Ver carrito</button>
+            <button class="btn-continuar">Continuar comprando</button>
+            <button class="btn-ir-a-pagar">Ir a pagar</button>
+        </div>
+    </div>
+</div>
+
+      <!-- Usuario -->
+      <div id="usuarioToggle" class="icono-usuario" aria-label="Menú usuario">
+        <i class="fas fa-user-circle"></i>
+      </div>
+
+      <!-- Menú hamburguesa (solo móvil) -->
+      <div id="menuToggle" class="icono-hamburguesa" aria-label="Menú móvil">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú usuario (ahora fuera de .iconos) -->
+  <ul id="menuUsuario" class="menu-usuario">
+    <!-- Estado por defecto (sin sesión iniciada) -->
+    <li><a href="../pages/login.html">Iniciar sesión</a></li>
+  </ul>
+
+    <!-- Menú de navegación -->
+    <div class="fila-inferior">
+      <ul id="menuNav" class="menu-nav">
+        <li><a href="../index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="../pages/productos.html">Productos ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="../pages/productos.html?cat=cachetero">Cachetero</a></li>
+            <li><a href="../pages/productos.html?cat=bikini">Bikini</a></li>
+            <li><a href="../pages/productos.html?cat=semihilo">Semi Hilo</a></li>
+          </ul>
+        </li>
+        <li><a href="../pages/nosotros.html">Nosotros</a></li>
+        <li><a href="../pages/marbelover.html">Sé una Marbelover</a></li>
+        <li><a href="../pages/contacto.html">Contacto</a></li>
+        <li><a href="https://surl.lu/htktvd" target="_blank">Nuestro Catálogo</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+ <main class="preguntas-nora">
+  <h1>Preguntas Frecuentes – Marbellín</h1>
+  <p class="intro-preguntas">
+    En esta sección encontrarás las preguntas más frecuentes de nuestros clientes,
+    con respuestas claras y sencillas para brindarte una experiencia de compra
+    rápida, segura y confiable.
+  </p>
+
+  <div class="pregunta-item">
+    <h2 class="pregunta-question">1. ¿Puedo comprar sin registrarme en Marbellín?</h2>
+    <p class="respuesta">
+      Sí. En Marbellín ofrecemos la posibilidad de realizar tu compra de
+      manera directa, rápida y sencilla, incluso si no cuentas con un registro previo
+      en la página. Esto significa que no es obligatorio crear una cuenta para poder
+      adquirir nuestros productos, lo cual facilita el proceso de compra a clientes
+      nuevos o a quienes prefieren un servicio más inmediato.
+    </p>
+  </div>
+
+  <div class="pregunta-item">
+    <h2 class="pregunta-question">2. ¿Los precios de Marbellín y otros distribuidores de Marbellín son los mismos?</h2>
+    <p class="respuesta">
+      En términos generales, los precios regulares que maneja Marbellín son
+      equivalentes a los de otros distribuidores oficiales de la marca Marbellín. No
+      obstante, dependiendo de cada distribuidor, su ubicación y el sistema de ventas
+      que utilice, pueden generarse ligeras variaciones en los costos finales.
+    </p>
+  </div>
+
+  <div class="pregunta-item">
+    <h2 class="pregunta-question">3. ¿Qué formas de pago aceptan en Marbellín?</h2>
+    <p class="respuesta">
+      Actualmente los pagos se realizan mediante transferencia bancaria a través de
+      banca móvil o internet banking, depósito directo en cuentas bancarias
+      nacionales y también a través de Yape. En el caso de los pedidos realizados
+      dentro de Lima, se brinda la alternativa adicional de efectuar el pago en
+      efectivo contra entrega, únicamente si se trata de un servicio de delivery o
+      envío a domicilio. Una vez que el pedido esté confirmado, proporcionaremos por
+      WhatsApp o correo los datos completos de las cuentas y número de Yape para que
+      el cliente pueda efectuar el abono con total seguridad.
+    </p>
+    
+    <div class="pregunta-item">
+    <h2 class="pregunta-question">4. ¿Puedo pagar en cuotas?</h2>
+    <p class="respuesta">
+      Por el momento no disponemos de un sistema de pagos fraccionados o en cuotas.
+      Todas las operaciones deben cancelarse de manera íntegra, ya sea mediante
+      transferencia, depósito bancario, Yape o efectivo en Lima.
+    </p>
+  </div>
+
+     <div class="pregunta-item">
+    <h2 class="pregunta-question">5. ¿Qué hago si ya hice mi pago y no se registra mi pedido?</h2>
+    <p class="respuesta">
+      En caso de que hayas realizado el pago y este aún no figure en nuestro sistema,
+      debes enviarnos el comprobante correspondiente, ya sea una captura de pantalla
+      o constancia, a través de nuestro WhatsApp oficial o al correo electrónico
+      <strong>distribuidoranora2025@gmail.com</strong>. De esta manera podremos
+      verificarlo y validar el pedido en el menor tiempo posible.
+    </p>
+     </div>
+    
+  <div class="pregunta-question">6. ¿Por qué mi pedido ha sido cancelado?</div>
+  <div class="respuesta">
+    Un pedido puede ser cancelado por diversas razones: porque no fue posible contactarte para confirmar la compra, porque el pago no se realizó dentro del plazo establecido, porque no logramos ubicarte en la dirección de entrega indicada o por algún inconveniente logístico en el despacho que impidió completar el envío. Si ya se efectuó el pago, el reembolso será gestionado según el caso y en coordinación directa con el cliente.
+  </div>
+
+  <div class="pregunta-question">7. ¿Puedo obtener una factura a nombre de mi empresa?</div>
+  <div class="respuesta">
+    Sí. Antes de finalizar tu compra puedes solicitar la emisión de boleta o factura. Para las facturas es indispensable contar con un RUC activo y que los datos de la razón social y dirección coincidan exactamente con los registrados en SUNAT. Una vez emitido, el comprobante electrónico será enviado al correo electrónico que indiques.
+  </div>
+
+  <div class="pregunta-question">8. ¿Recibiré el mismo producto que veo en la foto?</div>
+  <div class="respuesta">
+    Sí, siempre que selecciones correctamente la talla, el color y el modelo deseado. Sin embargo, es importante señalar que las imágenes mostradas son de carácter referencial, por lo que los tonos de color pueden presentar ligeras variaciones de intensidad según el dispositivo en el que se visualicen.
+  </div>
+
+  <div class="pregunta-question">9. ¿Cómo puedo asegurarme de haber realizado bien mi compra?</div>
+  <div class="respuesta">
+    Una vez que tu pago sea validado recibirás una confirmación oficial mediante WhatsApp o correo electrónico. Este mensaje servirá como respaldo de que tu pedido ha sido procesado exitosamente. En caso de no recibirlo, te recomendamos comunicarte de inmediato con nosotros al correo distribuidoranora2025@gmail.com.
+  </div>
+
+  <div class="pregunta-question">10. ¿Puedo eliminar algún artículo que ya haya seleccionado?</div>
+  <div class="respuesta">
+    Sí, siempre y cuando tu pedido no haya sido confirmado aún. Desde la bolsa de compras puedes retirar los artículos que ya no desees adquirir antes de finalizar el proceso.
+  </div>
+
+<div class="pregunta-question">11. ¿Puedo cancelar mi pedido?</div>
+<div class="respuesta">
+  Sí, puedes cancelar tu pedido antes de que sea despachado. Ten en cuenta que podrían aplicarse costos administrativos derivados de la cancelación. Para ello debes escribirnos al correo distribuidoranora2025@gmail.com o por WhatsApp. En caso de que el pedido ya se encuentre en tránsito, no será posible anularlo, aunque sí podrás iniciar un proceso de devolución sujeto a nuestras políticas vigentes.
+</div>
+
+<div class="pregunta-question">12. ¿Marbellín hace entregas en todo el Perú?</div>
+<div class="respuesta">
+  Sí. Contamos con cobertura de despachos tanto en Lima como en provincias a través de agencias de transporte aliadas. Si la dirección de entrega se encuentra en una zona de difícil acceso o de riesgo, coordinaremos contigo una alternativa viable para garantizar la entrega.
+</div>
+
+<div class="pregunta-question">13. ¿Marbellín hace entregas fuera del Perú?</div>
+<div class="respuesta">
+  No. Actualmente solo realizamos envíos dentro del territorio nacional.
+</div>
+
+<div class="pregunta-question">14. ¿Puedo elegir una fecha y hora para la entrega de mi producto?</div>
+<div class="respuesta">
+  No es posible fijar una fecha y hora exacta de entrega. Sin embargo, en Lima ofrecemos la opción de Envío Express, la cual permite coordinar una entrega más rápida, en un plazo aproximado de 5 horas o en el día, según disponibilidad, previa coordinación por WhatsApp.
+</div>
+
+<div class="pregunta-question">15. ¿Puede un apoderado recibir mi producto?</div>
+<div class="respuesta">
+  Sí, siempre que nos indiques previamente su nombre completo y número de DNI, ya sea por correo o WhatsApp, al momento de registrar el pedido.
+</div>
+
+<div class="pregunta-question">16. ¿Qué pasa si el cliente o apoderado no está presente para recibir el producto?</div>
+<div class="respuesta">
+  En Lima, el pedido retornará a nuestra oficina central. En provincias, el paquete será enviado de regreso a la agencia de transporte correspondiente. El cliente dispone de 15 días calendario para recogerlo, de lo contrario el pedido será anulado.
+</div>
+
+<div class="pregunta-question">17. ¿Qué hago si mi pedido no ha llegado?</div>
+<div class="respuesta">
+  Debes verificar primero que hayas recibido la confirmación de despacho. Si ya transcurrió el tiempo estimado de entrega y el pedido aún no llega, comunícate con nosotros de inmediato al correo distribuidoranora2025@gmail.com o vía WhatsApp para rastrear y confirmar el estado de tu envío.
+</div>
+
+<div class="pregunta-question">18. ¿Qué debo hacer si me llega un artículo dañado?</div>
+<div class="respuesta">
+  Si el producto presenta algún daño, debes reportarlo de inmediato a través del correo electrónico o WhatsApp. Evaluaremos el caso y procederemos de acuerdo con nuestra política de cambios y devoluciones, garantizando la atención oportuna de tu solicitud.
+</div>
+
+<div class="pregunta-question">19. Si realizo la devolución del producto, ¿tengo que pagar algo por hacerlo?</div>
+<div class="respuesta">
+  No, las devoluciones por garantía no tienen costo. Sin embargo, si se determina que el daño o deterioro es consecuencia de un mal uso, falta de cuidado o incumplimiento de las instrucciones de uso, los gastos administrativos deberán ser asumidos por el cliente.
+</div>
+
+<div class="pregunta-question">20. ¿Qué debo hacer si el importe de mi devolución es incorrecto?</div>
+<div class="respuesta">
+  Debes escribirnos al correo distribuidoranora2025@gmail.com para detallar tu caso. Nuestro equipo evaluará la situación y se comunicará contigo para corregir cualquier error.
+</div>
+    
+    <div class="pregunta-question">21. ¿Puedo recibir información sobre novedades y ofertas?</div>
+<div class="respuesta">
+  Sí. Puedes registrarte con tu correo electrónico en nuestra página web o solicitarnos directamente por WhatsApp o correo que te agreguemos a nuestra lista de clientes frecuentes para mantenerte al tanto de lanzamientos, promociones y descuentos especiales.
+</div>
+
+<div class="pregunta-question">22. Si tengo una consulta, sugerencia o reclamo, ¿cómo me comunico con Marbellín?</div>
+<div class="respuesta">
+  Puedes comunicarte con nosotros a través del correo distribuidoranora2025@gmail.com o mediante nuestro WhatsApp oficial. Será un gusto atenderte y resolver cualquier consulta, sugerencia o reclamo.
+</div>
+    
+  </main>
+
+    <!-- Footer Section -->
+  <footer>
+    <section id="footer1">
+      <div class="column">
+        <!-- Info cliente -->
+        <h3>SERVICIO AL CLIENTE</h3>
+        <ul>
+          <li><a href="contacto.html">Contactanos</a></li>
+          <li><a href="distribuidora.html">Distribuidores</a></li>
+          <li><a href="marbelover.html">Sé una Marvelover</a></li>
+          <li><a href="tarifaenvio.html">Tarifa de envio</a></li>
+          <li><a href="preguntasfrecuentes.html">Preguntas frecuentes</a></li>
+        </ul>
+        <!-- Redes sociales -->
+        <div class="social-buttons">
+          <a class="social-btn" href="https://www.facebook.com/share/16LxCFavzs/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+          </a>
+          <a class="social-btn" href="https://www.instagram.com/marbellin_lenceria" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+          </a>
+          <a class="social-btn" href="https://www.tiktok.com/@maribellin.lenceria" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok" />
+          </a>
+          <a class="social-btn" href="https://youtube.com/@lenceria_de_dama_2024" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+          </a>
+        </div>
+      </div>
+     <!-- Info cuenta -->
+      <div class="column">
+        <h3>CUENTA</h3>
+        <ul>
+          <li><a href="registro.html">Crear cuenta</a></li>
+          <li>
+            <a href="libro-reclamaciones.html">
+              <img class="icono-libro-reclamaciones" src="../assets/icons/libro-de-reclamaciones.webp" alt="Libro de reclamaciones">
+            </a>
+          </li>
+        </ul>
+        <h3>MARBELLÍN</h3>
+        <ul>
+          <li><a href="nosotros.html">Sobre nosotros</a></li>
+          <li><a href="terminos.html">Términos y condiciones</a></li>
+          <li><a href="politica-privacidad.html">Política de privacidad</a></li>
+          <li><a href="cambios-devoluciones.html">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Contactanos</a></li>
+          </a>
+        </ul>
+      </div>
+      <!-- Info contacto -->
+      <div class="column">
+        <h3>CONTACTO</h3>
+        <p>
+  Jr. Hipólito Unanue 1457, La Victoria. A una cuadra del Parque Cánepa, toldo color negro, cruzando la Av. Huánuco.
+</p>
+        
+<p>
+  Jr. América 325, Tienda 2, La Victoria.
+</p>    
+        <p>Teléfono: +51 922886724</p>
+        <p>Correo:
+<a href="mailto:distribuidoranora2025@gmail.com">distribuidoranora2025@gmail.com</a>
+        </p>
+        <div class="map-container">
+          
+            <iframe class="map-frame"
+
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.102834567908!2d-77.023879!3d-12.066661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8a02b1c9c8d%3A0x0!2sJir%C3%B3n%20Hip%C3%B3lito%20Unanue%201457%2C%20Lima%2015018!5e0!3m2!1ses-419!2spe!4v1693710000000!5m2!1ses-419!2spe"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      
+      </div>
+    </section>
+    <p id="derechos">&copy; 2026 Marbellín Lencería. Todos los derechos reservados.</p>
+</footer>
+
+  <script type="module" src="../js/cargar-productos.js"></script>
+  <script type="module" src="../js/cart/main-carrito.js"></script>
+  <script type="module" src="../js/search/buscador.js"></script>
+  <script type="module" src="../js/login.js"></script>
+<script type="module" src="../js/preguntasfrecuentes.js"></script>
+  <script type="module" src="../js/usuario.js"></script>
+
+  <script src="../js/headerBanner.js"></script>
+</body>
+
+</html>

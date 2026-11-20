@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="imagenes/icono.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap">
+  <link rel="stylesheet" href="../css/layout/footer.css">
+  <link rel="stylesheet" href="../css/layout/header.css">
+  <link rel="stylesheet" href="../css/layout/headerbusqueda.css">
+  <link rel="stylesheet" href="../css/layout/headercarrito.css">
+  <link rel="stylesheet" href="../css/layout/headerhamburgesa.css">
+  <link rel="stylesheet" href="../css/layout/whatsapp.css">
+  <link rel="stylesheet" href="../css/base/variable.css">
+  <link rel="stylesheet" href="../css/base/reset.css">
+  <link rel="stylesheet" href="../css/nosotros.css">
+  <link rel="stylesheet" href="../css/usuario.css">
+  <title>Marbellín Lencería - Nosotros</title>
+</head>
+
+<body>
+<header>
+<nav>
+    <div class="fila-superior">
+      <!-- Logo -->
+      <a href="../index.html">
+        <img id="logo" src="../assets/icons/logo-marbellin.png" alt="Logo de Marbellín Lencería">
+      </a>
+
+      <!-- Buscador -->
+      <div class="buscador">
+        <input type="text" placeholder="Buscar producto..." autocomplete="off" />
+        <button class="boton-buscar" aria-label="Buscar">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <!-- Iconos (Carrito y Usuario) -->
+          <div class="iconos">
+     <!-- Carrito -->
+<div class="contenedor-carrito-hover">
+ 
+    <a href="javascript:void(0)" id="abrir-carrito">
+        <i class="fas fa-shopping-cart icono-carrito"></i>
+    </a>
+
+    <div class="mini-carrito" id="mini-carrito">
+      
+      <button class="cerrar-carrito" id="cerrar-carrito">&times;</button>
+
+        <h3 class="titulo-carrito">Mi Carrito</h3>
+     
+        <ul class="lista-carrito"></ul>
+
+        <div class="subtotal-general" id="subtotal-general">
+            <strong>Subtotal:</strong> S/. 0.00
+        </div>
+
+         <div class="acciones-carrito">
+            <button class="btn-ver-carrito">Ver carrito</button>
+            <button class="btn-continuar">Continuar comprando</button>
+            <button class="btn-ir-a-pagar">Ir a pagar</button>
+        </div>
+    </div>
+</div>
+
+      <!-- Usuario -->
+      <div id="usuarioToggle" class="icono-usuario" aria-label="Menú usuario">
+        <i class="fas fa-user-circle"></i>
+      </div>
+
+      <!-- Menú hamburguesa (solo móvil) -->
+      <div id="menuToggle" class="icono-hamburguesa" aria-label="Menú móvil">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú usuario (ahora fuera de .iconos) -->
+  <ul id="menuUsuario" class="menu-usuario">
+    <!-- Estado por defecto (sin sesión iniciada) -->
+    <li><a href="../pages/login.html">Iniciar sesión</a></li>
+  </ul>
+
+    <!-- Menú de navegación -->
+    <div class="fila-inferior">
+      <ul id="menuNav" class="menu-nav">
+        <li><a href="../index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="../pages/productos.html">Productos ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="../pages/productos.html?cat=cachetero">Cachetero</a></li>
+            <li><a href="../pages/productos.html?cat=bikini">Bikini</a></li>
+            <li><a href="../pages/productos.html?cat=semihilo">Semi Hilo</a></li>
+          </ul>
+        </li>
+        <li><a href="../pages/nosotros.html">Nosotros</a></li>
+        <li><a href="../pages/marbelover.html">Sé una Marbelover</a></li>
+        <li><a href="../pages/contacto.html">Contacto</a></li>
+        <li><a href="https://surl.lu/htktvd" target="_blank">Nuestro Catálogo</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+  <!-- Sección principal -->
+  <main>
+    <section class="section">
+      <h1 class="section-title">
+        Más que lencería, una declaración de empoderamiento femenino
+      </h1>
+
+      <p>La empresa fue fundada el 24 de noviembre de 2017, especializándose en la confección de ropa interior
+        femenina, en particular lencería en todos sus estilos. Desde sus inicios, ha buscado optimizar la
+        producción y distribución mediante tecnologías modernas y la capacitación continua de su personal, con
+        el objetivo de reducir costos y elevar la calidad de sus productos.</p>
+
+      <p>Queremos ser más que una marca: un reflejo de la fuerza, belleza y valor único de cada mujer, impactando
+        positivamente en su autoestima, bienestar y estilo de vida. Valoramos a nuestros colaboradores,
+        trabajando con ellos para que puedan crecer profesionalmente y disfrutar de múltiples beneficios.</p>
+    </section>
+
+    <!-- Fila 1: Sobre la empresa -->
+   <!-- Sección principal sobre la empresa -->
+<section class="contenedor">
+
+  <!-- Fila 1: Visión, Misión y Valores -->
+  <div class="cuadro">
+    <h2 class="subtitulo">
+      <i class="fas fa-eye"></i>
+      <span>VISIÓN DE MARBELLÍN</span>
+    </h2>
+    <p>
+      Para 2035, Marbellín se consolidará como líder en la distribución de productos de lencería, destacando por su eficiencia, cobertura nacional y servicio confiable a distribuidores y clientes finales. Nuestro objetivo es que cada punto de venta reciba los productos de manera oportuna y profesional, garantizando calidad en la entrega y satisfacción tanto de nuestros socios comerciales como de los consumidores finales en todo el país.
+    </p>
+  </div>
+
+  <div class="cuadro">
+    <h2 class="subtitulo">
+      <i class="fas fa-bullseye"></i>
+      <span>MISIÓN DE MARBELLÍN</span>
+    </h2>
+    <p>
+      La misión de Marbellín es distribuir productos de lencería con excelencia, apoyando a nuestros distribuidores para que puedan crecer y ofrecer productos de calidad a sus clientes. Nos comprometemos a mantener procesos logísticos ágiles, un servicio de soporte integral y una comunicación constante, fortaleciendo nuestras relaciones comerciales y asegurando que cada socio reciba atención personalizada y soluciones eficaces para optimizar su negocio y ventas.
+    </p>
+  </div>
+
+  <div class="cuadro">
+    <h2 class="subtitulo">
+      <i class="fas fa-handshake"></i>
+      <span>VALORES ORGANIZACIONALES</span>
+    </h2>
+    <p>
+      En Marbellín, nuestros valores guían todas nuestras acciones. La Integridad asegura transparencia, el Compromiso garantiza entregas puntuales, y la Empatía nos permite comprender y apoyar a cada distribuidor. La Innovación impulsa mejoras continuas en logística y procesos de distribución. Finalmente, la Responsabilidad Social nos motiva a practicar sostenibilidad y contribuir al bienestar de la comunidad, asegurando relaciones éticas y duraderas con todos nuestros socios y clientes.
+    </p>
+  </div>
+
+   <!-- Fila 2: Beneficios para los colaboradores -->
+<div class="cuadro">
+  <h2 class="subtitulo">
+    <i class="fas fa-utensils"></i>
+    <span>ALIMENTACIÓN CON PROPÓSITO</span>
+  </h2>
+  <p>
+    En Marbellín creemos que una alimentación adecuada impulsa el bienestar y el rendimiento de nuestros colaboradores. Por ello, ofrecemos menús elaborados por especialistas, adaptados a los distintos turnos de trabajo. Cubrimos un porcentaje del costo total para que todos disfruten de opciones nutritivas y deliciosas, promoviendo hábitos saludables. Así garantizamos que el equipo se mantenga activo, motivado y en las mejores condiciones para cumplir sus tareas diarias con excelencia y compromiso.
+  </p>
+</div>
+
+<div class="cuadro">
+  <h2 class="subtitulo">
+    <i class="fas fa-gift"></i>
+    <span>CELEBRAMOS TUS MOMENTOS</span>
+  </h2>
+  <p>
+    En Marbellín acompañamos a nuestros colaboradores en los momentos que realmente importan. Brindamos apoyo en casos de maternidad, matrimonio y situaciones de salud, otorgando permisos especiales y auxilios económicos. Además, en fechas significativas como Día de la Madre o del Padre, promovemos tiempo libre para que puedan compartir con sus seres queridos, asegurando un equilibrio entre trabajo y vida personal, generando un ambiente laboral positivo, cercano y respetuoso que fomente la confianza y el bienestar del equipo.
+  </p>
+</div>
+
+<div class="cuadro">
+  <h2 class="subtitulo">
+    <i class="fas fa-trophy"></i>
+    <span>RECONOCIMIENTO QUE INSPIRA</span>
+  </h2>
+  <p>
+    El esfuerzo y la dedicación de nuestro equipo merecen ser reconocidos. En Marbellín premiamos el cumplimiento de metas con incentivos especiales y entregamos obsequios simbólicos en fechas importantes, como muestra de agradecimiento. Valoramos la constancia, el compromiso y la excelencia, fomentando una cultura laboral motivadora que inspire a todos los colaboradores a dar lo mejor de sí, generando orgullo y satisfacción al contribuir al éxito de la empresa y al bienestar de los clientes.
+  </p>
+</div>
+
+<!-- Fila 3: Más beneficios para colaboradores -->
+<div class="cuadro">
+  <h2 class="subtitulo">
+    <i class="fas fa-percent"></i>
+    <span>DESCUENTOS Y OPORTUNIDADES</span>
+  </h2>
+  <p>
+    Nuestros colaboradores en Marbellín disfrutan de descuentos exclusivos y facilidades de crédito para adquirir productos de lencería de alta calidad. Además, promovemos el espíritu emprendedor ofreciendo apoyo a quienes deseen iniciar sus propios negocios relacionados con nuestros productos. Esta iniciativa fomenta la creatividad, la independencia económica y fortalece la relación con nuestro equipo, generando oportunidades que impulsan tanto su desarrollo personal como el crecimiento sostenido de la empresa en el mercado nacional.
+  </p>
+</div>
+
+<div class="cuadro">
+  <h2 class="subtitulo">
+    <i class="fas fa-leaf"></i>
+    <span>COMPROMISO SOCIAL Y AMBIENTAL</span>
+  </h2>
+  <p>
+    En Marbellín nos comprometemos con la sostenibilidad y la protección del medio ambiente. Nuestros empaques son 100% ecológicos, fabricados en cartón y papel reciclables, eliminando el uso de plástico. Adoptamos prácticas responsables en cada etapa de nuestra operación, desde la distribución hasta la entrega final, promoviendo conciencia ambiental entre nuestros colaboradores y clientes. Esta filosofía fortalece nuestra misión de ofrecer productos de calidad mientras contribuimos al cuidado del planeta y al bienestar de la comunidad.
+  </p>
+</div>
+
+<div class="cuadro">
+  <h2 class="subtitulo">
+    <i class="fas fa-users"></i>
+    <span>UN EQUIPO CON CORAZÓN</span>
+  </h2>
+  <p>
+    Somos más que una empresa: en Marbellín formamos un equipo unido y apasionado por lo que hacemos. Valoramos a nuestros colaboradores, respetamos el medio ambiente y fomentamos un ambiente laboral basado en la cooperación y el compromiso. Cada día trabajamos con dedicación y orgullo, asegurando que cada acción fortalezca la confianza de nuestros distribuidores y clientes. Nuestro enfoque en la calidad, la ética y la responsabilidad social define la esencia de nuestro equipo y nuestra marca.
+  </p>
+</div>
+    </section>
+    
+    <!-- Whatsapp flotante -->
+    <div class="whatsapp-float">
+      <a href="https://wa.me/51922886724" target="_blank" class="whatsapp-bubble">
+        <span>¿Necesitas ayuda? Conversemos</span>
+        <div class="whatsapp-button">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+        </div>
+      </a>
+    </div>
+  </main>
+  
+   <!-- Footer Section -->
+  <footer>
+    <section id="footer1">
+      <div class="column">
+        <!-- Info cliente -->
+        <h3>SERVICIO AL CLIENTE</h3>
+        <ul>
+          <li><a href="contacto.html">Contactanos</a></li>
+          <li><a href="distribuidora.html">Distribuidores</a></li>
+          <li><a href="marbelover.html">Sé una Marvelover</a></li>
+          <li><a href="tarifaenvio.html">Tarifa de envio</a></li>
+          <li><a href="preguntasfrecuentes.html">Preguntas frecuentes</a></li>
+        </ul>
+        <!-- Redes sociales -->
+        <div class="social-buttons">
+          <a class="social-btn" href="https://www.facebook.com/share/16LxCFavzs/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+          </a>
+          <a class="social-btn" href="https://www.instagram.com/marbellin_lenceria" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+          </a>
+          <a class="social-btn" href="https://www.tiktok.com/@maribellin.lenceria" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok" />
+          </a>
+          <a class="social-btn" href="https://youtube.com/@lenceria_de_dama_2024" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+          </a>
+        </div>
+      </div>
+     <!-- Info cuenta -->
+      <div class="column">
+        <h3>CUENTA</h3>
+        <ul>
+          <li><a href="registro.html">Crear cuenta</a></li>
+          <li>
+            <a href="libro-reclamaciones.html">
+              <img class="icono-libro-reclamaciones" src="../assets/icons/libro-de-reclamaciones.webp" alt="Libro de reclamaciones">
+            </a>
+          </li>
+        </ul>
+        <h3>MARBELLÍN</h3>
+        <ul>
+          <li><a href="nosotros.html">Sobre nosotros</a></li>
+          <li><a href="terminos.html">Términos y condiciones</a></li>
+          <li><a href="politica-privacidad.html">Política de privacidad</a></li>
+          <li><a href="cambios-devoluciones.html">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Contactanos</a></li>
+          </a>
+        </ul>
+      </div>
+<!-- Info contacto -->
+      <div class="column">
+        <h3>CONTACTO</h3>
+        <p>
+  Jr. Hipólito Unanue 1457, La Victoria. A una cuadra del Parque Cánepa, toldo color negro, cruzando la Av. Huánuco.
+</p>
+        
+<p>
+  Jr. América 325, Tienda 2, La Victoria.
+</p>    
+        <p>Teléfono: +51 922886724</p>
+        <p>Correo:
+<a href="mailto:distribuidoranora2025@gmail.com">distribuidoranora2025@gmail.com</a>
+        </p>
+        <div class="map-container">
+          
+            <iframe class="map-frame"
+
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.102834567908!2d-77.023879!3d-12.066661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8a02b1c9c8d%3A0x0!2sJir%C3%B3n%20Hip%C3%B3lito%20Unanue%201457%2C%20Lima%2015018!5e0!3m2!1ses-419!2spe!4v1693710000000!5m2!1ses-419!2spe"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      
+      </div>
+    </section>
+    <p id="derechos">&copy; 2026 Marbellín Lencería. Todos los derechos reservados.</p>
+</footer>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/cart/main-carrito.js"></script>
+  <script type="module" src="../js/search/buscador.js"></script>
+  <script type="module" src="../js/login.js"></script>
+  <script type="module">
+    import { configurarMenuUsuario } from "../js/auth/menuUsuario.js";
+    configurarMenuUsuario();
+  </script>
+  <script type="module" src="../js/usuario.js"></script>
+       
+  <script src="../js/headerBanner.js"></script>
+</body>
+
+</html>

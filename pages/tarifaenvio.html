@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/base/reset.css">
+  <link rel="stylesheet" href="../css/base/variable.css">
+  <link rel="stylesheet" href="../css/layout/footer.css">
+  <link rel="stylesheet" href="../css/layout/header.css">
+  <link rel="stylesheet" href="../css/layout/headerbusqueda.css">
+  <link rel="stylesheet" href="../css/layout/headercarrito.css">
+  <link rel="stylesheet" href="../css/layout/headerhamburgesa.css">
+  <link rel="stylesheet" href="../css/layout/whatsapp.css">
+  <link rel="stylesheet" href="../css/tarifaenvio.css">
+  <link rel="stylesheet" href="../css/usuario.css">
+  <title>Marbellín Lencería - Productos</title>
+</head>
+
+<body>
+  <!-- Header Section -->
+<header>
+<nav>
+    <div class="fila-superior">
+      <!-- Logo -->
+      <a href="../index.html">
+        <img id="logo" src="../assets/icons/logo-marbellin.png" alt="Logo de Marbellín Lencería">
+      </a>
+
+      <!-- Buscador -->
+      <div class="buscador">
+        <input type="text" placeholder="Buscar producto..." autocomplete="off" />
+        <button class="boton-buscar" aria-label="Buscar">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <!-- Iconos (Carrito y Usuario) -->
+          <div class="iconos">
+     <!-- Carrito -->
+<div class="contenedor-carrito-hover">
+ 
+    <a href="javascript:void(0)" id="abrir-carrito">
+        <i class="fas fa-shopping-cart icono-carrito"></i>
+    </a>
+
+    <div class="mini-carrito" id="mini-carrito">
+      
+      <button class="cerrar-carrito" id="cerrar-carrito">&times;</button>
+
+        <h3 class="titulo-carrito">Mi Carrito</h3>
+     
+        <ul class="lista-carrito"></ul>
+
+        <div class="subtotal-general" id="subtotal-general">
+            <strong>Subtotal:</strong> S/. 0.00
+        </div>
+
+         <div class="acciones-carrito">
+            <button class="btn-ver-carrito">Ver carrito</button>
+            <button class="btn-continuar">Continuar comprando</button>
+            <button class="btn-ir-a-pagar">Ir a pagar</button>
+        </div>
+    </div>
+</div>
+
+      <!-- Usuario -->
+      <div id="usuarioToggle" class="icono-usuario" aria-label="Menú usuario">
+        <i class="fas fa-user-circle"></i>
+      </div>
+
+      <!-- Menú hamburguesa (solo móvil) -->
+      <div id="menuToggle" class="icono-hamburguesa" aria-label="Menú móvil">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú usuario (ahora fuera de .iconos) -->
+  <ul id="menuUsuario" class="menu-usuario">
+    <!-- Estado por defecto (sin sesión iniciada) -->
+    <li><a href="../pages/login.html">Iniciar sesión</a></li>
+  </ul>
+
+    <!-- Menú de navegación -->
+    <div class="fila-inferior">
+      <ul id="menuNav" class="menu-nav">
+        <li><a href="../index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="../pages/productos.html">Productos ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="../pages/productos.html?cat=cachetero">Cachetero</a></li>
+            <li><a href="../pages/productos.html?cat=bikini">Bikini</a></li>
+            <li><a href="../pages/productos.html?cat=semihilo">Semi Hilo</a></li>
+          </ul>
+        </li>
+        <li><a href="../pages/nosotros.html">Nosotros</a></li>
+        <li><a href="../pages/marbelover.html">Sé una Marbelover</a></li>
+        <li><a href="../pages/contacto.html">Contacto</a></li>
+        <li><a href="https://surl.lu/htktvd" target="_blank">Nuestro Catálogo</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+ <!-- Main Section -->
+<main class="tarifas-envio">
+  <h1>Tarifas de Envío</h1>
+
+  <!-- Sección de envíos (se mantiene igual) -->
+  <div class="envios-container">
+    <!-- Envíos Lima Metropolitana y Callao -->
+    <div class="envio-lima">
+      <p>Solo en <strong>Lima Metropolitana y Callao</strong></p>
+      <h2>¡YA ESTAMOS LLEVANDO TUS COMPRAS A CASA!</h2>
+    </div>
+
+    <!-- Imagen del motorizado -->
+    <div class="motorizado">
+      <img src="../assets/icons/motorizado.png" alt="Motorizado Marbellin" loading="lazy">
+    </div>
+
+    <!-- Envíos a Provincia -->
+    <div class="envio-provincia">
+      <h3>ENVÍOS A PROVINCIA</h3>
+      <p>Contáctanos para confirmar el tiempo de tu entrega.</p>
+      <div class="whatsapp-line">
+        <img src="../assets/icons/WhatsApp.png" alt="WhatsApp Marbellin" loading="lazy">
+        <a href="https://wa.me/51922886724" target="_blank" rel="noopener noreferrer">+51 922 886 724</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Política de Envíos -->
+  <section class="politica-envios">
+    <h2>Política de Envíos</h2>
+    <p>
+      En <strong>Marbellín</strong> cuidamos cada detalle para que tu pedido llegue en perfectas condiciones, con embalaje seguro y presentación elegante. Nuestro compromiso es ofrecerte un servicio confiable, rápido y con la calidad premium que nos caracteriza.
+    </p>
+    <p>
+      Los tiempos de entrega pueden variar según la zona, pero garantizamos que recibirás tu pedido de manera oportuna. Ya sea en Lima Metropolitana o Callao, nos aseguramos de que tu experiencia de compra sea cómoda, segura y completamente satisfactoria.
+    </p>
+  </section>
+
+  <!-- Medios de Entrega -->
+<section class="medios-entrega-container">
+  <h2>Medios de Entrega</h2>
+  <p>Realizamos nuestros envíos a través de:</p>
+  <ul class="medios-entrega">
+    <li>
+      <figure>
+        <img src="../assets/icons/Shalom.png" alt="Shalom" loading="lazy">
+        <figcaption>Shalom</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img src="../assets/icons/Marvisur.png" alt="Marvisur" loading="lazy">
+        <figcaption>Marvisur</figcaption>
+      </figure>
+    </li>
+  </ul>
+  <blockquote class="frase-envios">
+    Confía en nuestros socios de envío, Shalom y Marvisur, para entregar tu pedido con rapidez, cuidado y la elegancia que caracteriza a Marbellin.
+  </blockquote>
+  <p>
+    Realizamos despachos en Lima y provincias de lunes a sábado, de 9:00 a.m. a 7:00 p.m. Los domingos y feriados no se realizan envíos, para garantizar que tu pedido llegue seguro y en perfecto estado al siguiente día hábil.
+  </p>
+</section>
+
+  <!-- Intentos de Entrega -->
+  <section class="intentos-entrega">
+    <h2>Intentos de Entrega</h2>
+    <p>
+      En la modalidad Regular, realizamos hasta dos intentos de entrega de tu pedido. Si no se concreta la entrega en estos intentos, programaremos un nuevo intento dentro de las siguientes 48 horas. De no lograrse la entrega tras los dos intentos, cualquier envío adicional estará sujeto a un cargo extra. Esto nos permite garantizar que tu pedido llegue de manera segura y que tengas claridad sobre los tiempos y condiciones de entrega.
+    </p>
+  </section>
+
+  <!-- Tiempos de Entrega -->
+  <section class="tiempos-entrega">
+    <h2>Tiempos de Entrega</h2>
+    <p>
+      Para pedidos dentro de Lima, el tiempo de entrega es de hasta 2 días hábiles, mientras que para provincias el plazo máximo es de 5 días hábiles. Todos los pedidos realizados de lunes a sábado se procesan dentro del mismo día si se reciben antes de las 12:00 p.m. Los pedidos recibidos después de esa hora, así como los realizados durante domingos o feriados, se procesarán el siguiente día hábil, asegurando que tu pedido llegue en el menor tiempo posible y en perfectas condiciones.
+    </p>
+  </section>
+
+  <!-- Tarifas de Envío -->
+  <section class="tarifas">
+    <h2>Tarifas de Envío</h2>
+    <p>
+      Nuestras tarifas se adaptan a tus necesidades y se calculan automáticamente según la cantidad de productos y la distancia de entrega, garantizando transparencia y conveniencia para que disfrutes de tu compra sin sorpresas.
+    </p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th scope="col">Zona</th>
+          <th scope="col">Tiempo de entrega</th>
+          <th scope="col">Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lima Metropolitana y Callao</td>
+          <td>2 días hábiles</td>
+          <td rowspan="3">El costo del envío será calculado automáticamente en la página web, según cantidad y distancia.</td>
+        </tr>
+        <tr>
+          <td>Costa y Sierra</td>
+          <td>3 días hábiles</td>
+        </tr>
+        <tr>
+          <td>Selva</td>
+          <td>4 días hábiles</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="note">
+      Nuestra tienda online está disponible <strong>24/7</strong>.  
+      Las órdenes recibidas después de las 12:00 p.m. serán consideradas como pedidos del día siguiente hábil.
+    </p>
+  </section>
+</main>
+
+   <!-- Footer Section -->
+  <footer>
+    <section id="footer1">
+      <div class="column">
+        <!-- Info cliente -->
+        <h3>SERVICIO AL CLIENTE</h3>
+        <ul>
+          <li><a href="contacto.html">Contactanos</a></li>
+          <li><a href="distribuidora.html">Distribuidores</a></li>
+          <li><a href="marbelover.html">Sé una Marvelover</a></li>
+          <li><a href="tarifaenvio.html">Tarifa de envio</a></li>
+          <li><a href="preguntasfrecuentes.html">Preguntas frecuentes</a></li>
+        </ul>
+        <!-- Redes sociales -->
+        <div class="social-buttons">
+          <a class="social-btn" href="https://www.facebook.com/share/16LxCFavzs/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+          </a>
+          <a class="social-btn" href="https://www.instagram.com/marbellin_lenceria" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+          </a>
+          <a class="social-btn" href="https://www.tiktok.com/@maribellin.lenceria" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok" />
+          </a>
+          <a class="social-btn" href="https://youtube.com/@lenceria_de_dama_2024" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+          </a>
+        </div>
+      </div>
+     <!-- Info cuenta -->
+      <div class="column">
+        <h3>CUENTA</h3>
+        <ul>
+          <li><a href="registro.html">Crear cuenta</a></li>
+          <li>
+            <a href="libro-reclamaciones.html">
+              <img class="icono-libro-reclamaciones" src="../assets/icons/libro-de-reclamaciones.webp" alt="Libro de reclamaciones">
+            </a>
+          </li>
+        </ul>
+        <h3>MARBELLÍN</h3>
+        <ul>
+          <li><a href="nosotros.html">Sobre nosotros</a></li>
+          <li><a href="terminos.html">Términos y condiciones</a></li>
+          <li><a href="politica-privacidad.html">Política de privacidad</a></li>
+          <li><a href="cambios-devoluciones.html">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Contactanos</a></li>
+          </a>
+        </ul>
+      </div>
+      <!-- Info contacto -->
+      <div class="column">
+        <h3>CONTACTO</h3>
+        <p>
+  Jr. Hipólito Unanue 1457, La Victoria. A una cuadra del Parque Cánepa, toldo color negro, cruzando la Av. Huánuco.
+</p>
+        
+<p>
+  Jr. América 325, Tienda 2, La Victoria.
+</p>    
+        <p>Teléfono: +51 922886724</p>
+        <p>Correo:
+<a href="mailto:distribuidoranora2025@gmail.com">distribuidoranora2025@gmail.com</a>
+        </p>
+        <div class="map-container">
+          
+            <iframe class="map-frame"
+
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.102834567908!2d-77.023879!3d-12.066661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8a02b1c9c8d%3A0x0!2sJir%C3%B3n%20Hip%C3%B3lito%20Unanue%201457%2C%20Lima%2015018!5e0!3m2!1ses-419!2spe!4v1693710000000!5m2!1ses-419!2spe"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      
+      </div>
+    </section>
+    <p id="derechos">&copy; 2026 Marbellín Lencería. Todos los derechos reservados.</p>
+</footer>
+
+  <script type="module" src="../js/cargar-productos.js"></script>
+  <script type="module" src="../js/cart/main-carrito.js"></script>
+  <script type="module" src="../js/search/buscador.js"></script>
+  <script type="module" src="../js/login.js"></script>
+  <script type="module" src="../js/usuario.js"></script>
+
+  <script src="../js/headerBanner.js"></script>
+</body>
+
+</html>
