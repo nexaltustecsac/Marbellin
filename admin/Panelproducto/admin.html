@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script>let sesionAdminPanel=null;try{sesionAdminPanel=JSON.parse(sessionStorage.getItem('adminSession')||'null')}catch(_){}if(sessionStorage.getItem('accesoAdmin')!=='true'||sesionAdminPanel?.rol!=='admin'){sessionStorage.removeItem('accesoAdmin');sessionStorage.removeItem('adminSession');window.location.replace('../Login-Administrador.html')}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c2185b">
+<title>Inventario | Marbellín Lencería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/admin-premium.css">
+<style>
+:root{--pink:#c2185b;--pink2:#e83e83;--pale:#fff1f6;--ink:#29232a;--muted:#766c73;--line:#f0dce5;--bg:#fff8fb;--green:#16865b;--amber:#b7791f;--red:#c53030}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#fff2f7,#fffafd 50%,#fceaf2);color:var(--ink);font-family:"DM Sans",sans-serif}
+.topbar{background:#fff;position:relative;top:auto;z-index:10;border-bottom:1px solid var(--line);box-shadow:0 5px 22px #8b315514}
+.topbar-inner{max-width:1440px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:44px;height:44px;border-radius:15px;background:linear-gradient(145deg,#ec4c8d,#b70d56);display:grid;place-items:center;color:white;font-size:22px;font-weight:700;box-shadow:0 7px 18px #c2185b35}
+.brand h1{font:700 20px "Playfair Display",serif;margin:0;color:#a90f50}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:11px 15px;font:600 13px "DM Sans";cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,var(--pink2),var(--pink));color:white;box-shadow:0 6px 14px #c2185b2b}.btn-light{background:#fff1f6;color:var(--pink);border:1px solid #f4d1e0}.btn-danger{background:#fff0f0;color:var(--red);border:1px solid #f5caca}.btn:hover{transform:translateY(-1px);filter:brightness(.98)}
+main{max-width:1440px;margin:0 auto;padding:28px 22px 60px}
+.heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}.eyebrow{color:var(--pink);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.heading h2{font:700 clamp(25px,4vw,36px) "Playfair Display",serif;margin:5px 0 5px}.heading p{color:var(--muted);margin:0;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px 18px;box-shadow:0 7px 20px #8b31550b}
+.stat-label{color:var(--muted);font-size:12px;font-weight:600}.stat-value{font-size:27px;font-weight:700;margin-top:6px;color:#342b31}.stat-note{font-size:11px;color:#9b8992;margin-top:2px}
+.notice{background:#fff9e9;border:1px solid #f4dfad;color:#79541a;border-radius:13px;padding:12px 15px;font-size:12px;line-height:1.5;margin:18px 0 20px}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 6px 20px #8b31550a}
+.search{flex:1;min-width:190px;position:relative}.search input,.toolbar select{width:100%;border:1px solid #ead7e0;border-radius:11px;background:#fff;padding:12px 13px;font:500 13px "DM Sans";outline:none;color:var(--ink)}.search input:focus,.toolbar select:focus,.field input:focus,.field textarea:focus,.field select:focus{border-color:#e83e83;box-shadow:0 0 0 3px #e83e8317}
+.toolbar select{width:auto;min-width:155px}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:25px 2px 14px}.section-title h3{margin:0;font-size:16px}.section-title span{font-size:12px;color:var(--muted)}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.product-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 22px #8b31550c;min-width:0;display:flex;flex-direction:column}
+.product-photo{height:auto;aspect-ratio:1 / 1;background:#fff;display:grid;place-items:center;overflow:hidden;position:relative;flex:none}
+.product-photo img{width:100%;height:100%;object-fit:contain;display:block}
+.product-id{position:absolute;left:10px;top:10px;background:#ffffffed;color:#8e3158;border-radius:8px;padding:5px 8px;font-size:10px;font-weight:700}
+.product-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product-name{font-size:15px;font-weight:700;margin:0;line-height:1.3}.category{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--pink);font-weight:700}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.price{background:#fff5f9;border:1px solid #f6e1ea;border-radius:10px;padding:8px 5px;text-align:center;min-width:0}
+.price small{display:block;color:#927b87;font-size:9px;font-weight:600;margin-bottom:4px}.price b{font-size:12px;white-space:nowrap}
+.stock-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);font-weight:600}
+.stock-total{font-weight:700;color:var(--ink)}
+.sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.size{background:#faf7f9;border-radius:8px;padding:7px 3px;text-align:center}.size small{display:block;color:#9b8992;font-size:9px}.size b{font-size:12px}
+.stock-state{font-size:10px;font-weight:700;border-radius:20px;padding:5px 8px;align-self:flex-start}.stock-state.zero{background:#fff0f0;color:#c53030}.stock-state.low{background:#fff7e6;color:#9a650b}.stock-state.ok{background:#eaf8f1;color:#16865b}
+.card-actions{display:flex;gap:7px;margin-top:auto}.card-actions .btn{flex:1;padding:9px 8px;font-size:11px}
+.empty{grid-column:1/-1;text-align:center;background:#fff;border:1px dashed #e8c5d5;padding:40px;border-radius:16px;color:var(--muted)}
+.modal-backdrop{position:fixed;inset:0;background:#26131e99;display:none;align-items:center;justify-content:center;padding:16px;z-index:30}.modal-backdrop.open{display:flex}
+.modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:22px;box-shadow:0 20px 70px #16000e44}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.modal-head h3{font:700 23px "Playfair Display";margin:0}.close{border:0;background:#fff1f6;color:var(--pink);width:36px;height:36px;border-radius:50%;font-size:21px;cursor:pointer}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:700;color:#66545e}.field input,.field textarea,.field select{width:100%;border:1px solid #ead7e0;border-radius:10px;padding:11px;font:13px "DM Sans";outline:none;background:#fff}.field textarea{min-height:75px;resize:vertical}.form-subtitle{grid-column:1/-1;margin:8px 0 -3px;color:var(--pink);font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2e2630;color:#fff;padding:12px 18px;border-radius:12px;font-size:13px;box-shadow:0 8px 30px #0003;display:none;z-index:40}
+@media(max-width:1000px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.product-grid{grid-template-columns:1fr}.topbar-inner{padding:12px 14px}.brand h1{font-size:17px}.brand-mark{width:38px;height:38px}.top-actions .btn{padding:9px 10px;font-size:11px}main{padding:20px 12px 42px}.heading{display:block}.heading .btn{margin-top:14px}.stats{gap:8px}.stat{padding:13px}.stat-value{font-size:22px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product-photo{height:auto;aspect-ratio:1 / 1}.product-body{padding:10px;gap:8px}.product-name{font-size:12px}.price-grid{gap:4px}.price{padding:7px 2px}.price small{font-size:8px}.price b{font-size:10px}.size{padding:6px 1px}.card-actions{gap:5px}.card-actions .btn{font-size:10px;padding:8px 4px}.toolbar{padding:10px}.search{min-width:100%}.toolbar select{flex:1;min-width:0}.form-grid{grid-template-columns:1fr}.field.full,.form-subtitle{grid-column:1}.modal{padding:17px}.modal-head h3{font-size:20px}}
+@media(max-width:360px){.product-grid{grid-template-columns:1fr}.product-photo{height:auto;aspect-ratio:1 / 1}}
+
+/* Encabezado unificado del panel administrativo Marbellín */
+.topbar{position:relative;top:auto;z-index:1000;height:72px;background:#f8bbd0;border-bottom:1px solid #f1c5d6;box-shadow:0 2px 10px rgba(160,30,80,.10)}
+.topbar-inner{height:100%;max-width:none;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.admin-menu-button{width:42px;height:42px;border:0;background:transparent;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:7px;cursor:pointer;flex:0 0 auto}
+.admin-menu-button span{height:3px;width:27px;background:#c2185b;border-radius:3px;box-shadow:0 0 4px rgba(194,24,91,.18)}
+.admin-top-spacer{flex:1}
+.admin-avatar-button{width:50px;height:50px;border:3px solid #fff;border-radius:50%;padding:0;overflow:hidden;background:#ffe3ef;display:grid;place-items:center;cursor:pointer;box-shadow:0 3px 12px rgba(194,24,91,.18);flex:0 0 auto}
+.admin-avatar-button img{width:100%;height:100%;object-fit:cover;display:none}
+.admin-avatar-button.has-photo img{display:block}
+.admin-avatar-fallback{font-size:34px;color:#c2185b;line-height:1}
+.admin-side-backdrop{position:fixed;inset:0;background:rgba(34,15,25,.38);opacity:0;visibility:hidden;transition:.25s;z-index:1100}
+.admin-side-backdrop.visible{opacity:1;visibility:visible}
+.admin-side-menu{position:fixed;top:0;left:0;width:min(360px,100vw);height:100dvh;background:#fff;z-index:1101;padding:26px 20px;transform:translateX(-105%);transition:transform .3s ease;display:flex;flex-direction:column;gap:9px;overflow-y:auto;box-shadow:10px 0 28px rgba(0,0,0,.12)}
+.admin-side-menu.open{transform:translateX(0)}
+.admin-side-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.admin-side-brand{font-size:22px;font-weight:700;color:#e91e63}
+.admin-side-close{border:0;border-radius:50%;width:42px;height:42px;background:#ffe4f1;color:#e91e63;font-size:27px;cursor:pointer}
+.admin-side-menu a,.admin-side-menu button.admin-logout{display:flex;align-items:center;gap:14px;width:100%;padding:15px 16px;border:0;border-radius:14px;background:#fff;color:#444;text-decoration:none;font:600 17px "DM Sans",sans-serif;text-align:left;cursor:pointer}
+.admin-side-menu a:hover{background:#fff0f6;color:#c2185b}
+.admin-side-menu .menu-symbol{width:24px;color:#e91e63;font-size:21px;text-align:center}
+.admin-side-menu button.admin-logout{margin-top:10px;background:#bd145d;color:#fff;justify-content:center}
+.admin-side-menu button.admin-logout .menu-symbol{color:#fff}
+@media(max-width:600px){.topbar{height:64px}.topbar-inner{padding:0 14px}.admin-avatar-button{width:46px;height:46px}.admin-side-menu{width:100vw;padding:26px 22px calc(24px + env(safe-area-inset-bottom))}.topbar .brand,.topbar .top-actions{display:none!important}main{padding-top:20px}}
+
+
+/* Fotografías cuadradas; si el archivo no existe, el área queda vacía y sin placeholder */
+.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.product-photo{aspect-ratio:1/1!important;height:auto!important;min-height:0;background:#fff!important;border:0!important;outline:0!important;box-shadow:none!important}
+.product-photo img{width:100%;height:100%;object-fit:contain;background:#fff}
+.product-photo.no-image{background:transparent!important;border:0!important;outline:0!important;box-shadow:none!important}
+.product-photo.no-image::before,.product-photo.no-image::after{content:none!important;display:none!important}
+@media(max-width:1000px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.product-grid{grid-template-columns:1fr;gap:14px}.product-photo{aspect-ratio:1/1!important}}
+
+
+.admin-identity{display:flex;align-items:center;gap:10px;padding:6px 13px 6px 6px;border:1px solid #f0d5e1;border-radius:999px;background:#fff;box-shadow:0 5px 18px rgba(112,30,67,.07)}.admin-display-name{font-size:13px;font-weight:800;color:#762044;white-space:nowrap}.admin-avatar-button{width:40px;height:40px;min-width:40px;border-radius:50%;overflow:hidden;background:#f9e5ee;display:grid;place-items:center}.admin-avatar-button img{width:100%;height:100%;object-fit:cover;border-radius:50%}.admin-avatar-button .admin-avatar-fallback{font-size:25px;color:#a90f50}
+
+</style>
+<script>try{const s=JSON.parse(localStorage.getItem("marbellinAdminSettings")||"{}");if(s.theme==="dark")document.documentElement.dataset.adminTheme="dark";}catch(e){}</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <button class="admin-menu-button" id="adminMenuButton" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="admin-top-spacer"></div>
+  <div class="admin-identity"><div class="admin-avatar-button" id="adminAvatarButton" aria-label="Fotografía del administrador">
+    <img id="adminAvatar" alt="Fotografía del administrador"><span class="material-icons admin-avatar-fallback">account_circle</span>
+  </div><span id="adminDisplayName" class="admin-display-name">Administrador</span></div>
+</div></header>
+<div class="admin-side-backdrop" id="adminSideBackdrop"></div>
+<aside class="admin-side-menu" id="adminSideMenu" aria-label="Menú administrativo">
+  <div class="admin-side-head"><div class="admin-side-brand">▦ Marbellín</div><button class="admin-side-close" id="adminMenuClose" type="button" aria-label="Cerrar menú">‹</button></div>
+  <a href="../Registro_producto.html"><span class="material-icons menu-symbol">home</span>Inicio</a>
+  <a href="admin.html"><span class="material-icons menu-symbol">category</span>Productos</a>
+  <a href="../Registro_producto.html?panel=pedidos"><span class="material-icons menu-symbol">shopping_cart</span>Pedidos</a>
+  <a href="../Registro_producto.html?panel=cliente"><span class="material-icons menu-symbol">people</span>Clientes</a>
+  <a href="../Registro_producto.html?panel=estadisticas"><span class="material-icons menu-symbol">bar_chart</span>Estadísticas</a>
+  <a href="../Registro_producto.html?panel=configuracion"><span class="material-icons menu-symbol">settings</span>Configuración</a>
+  <button class="admin-logout" type="button" onclick="cerrarSesion()"><span class="material-icons menu-symbol">logout</span>Cerrar sesión</button>
+</aside>
+<main>
+  <div class="heading">
+    <div><div class="eyebrow">Control de tienda</div><h2>Productos e inventario</h2><p>Administra fotografías, precios comerciales y existencias por talla.</p></div>
+    <button class="btn btn-primary" type="button" onclick="abrirNuevo()">＋ Agregar producto</button>
+  </div>
+  <section class="stats">
+    <div class="stat"><div class="stat-label">Productos registrados</div><div class="stat-value" id="statProductos">0</div><div class="stat-note">En el catálogo administrativo</div></div>
+    <div class="stat"><div class="stat-label">Unidades en inventario</div><div class="stat-value" id="statUnidades">0</div><div class="stat-note">Suma de todas las tallas</div></div>
+    <div class="stat"><div class="stat-label">Productos sin stock</div><div class="stat-value" id="statAgotados">0</div><div class="stat-note">Necesitan registrar existencias</div></div>
+    <div class="stat"><div class="stat-label">Categorías</div><div class="stat-value" id="statCategorias">0</div><div class="stat-note">Tipos de productos</div></div>
+  </section>
+  <div class="notice"><strong>Importante:</strong> las cantidades iniciales aparecen en 0 porque el proyecto no contiene un conteo físico confirmado. Registra las unidades reales por talla para que el inventario sea confiable. Los precios que aparecen son los que ya estaban guardados en el catálogo del proyecto; los campos sin precio documentado se muestran como “—”.</div>
+  <div class="toolbar">
+    <div class="search"><input id="buscar" type="search" placeholder="Buscar por nombre o ID…" oninput="renderizar()"></div>
+    <select id="filtroCategoria" onchange="renderizar()"><option value="todas">Todas las categorías</option><option value="bikini">Bikini</option><option value="cachetero">Cachetero</option><option value="semihilo">Semi hilo</option></select>
+    <select id="filtroStock" onchange="renderizar()"><option value="todos">Todo el stock</option><option value="agotado">Sin stock</option><option value="disponible">Con stock</option></select>
+  </div>
+  <div class="section-title"><h3>Catálogo administrativo</h3><span id="resultadoConteo">0 productos</span></div>
+  <section id="productGrid" class="product-grid"></section>
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop" onclick="cerrarModalSiFondo(event)">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><h3 id="modalTitle">Agregar producto</h3><button class="close" type="button" onclick="cerrarModal()" aria-label="Cerrar">×</button></div>
+    <form id="productoForm">
+      <div class="form-grid">
+        <div class="field"><label for="fId">ID del producto</label><input id="fId" type="number" min="1" required></div>
+        <div class="field"><label for="fNombre">Nombre del producto</label><input id="fNombre" maxlength="70" required></div>
+        <div class="field"><label for="fCategoria">Categoría</label><select id="fCategoria" required><option value="bikini">Bikini</option><option value="cachetero">Cachetero</option><option value="semihilo">Semi hilo</option></select></div>
+        <div class="field"><label for="fImagen">Fotografía (opcional)</label><input id="fImagen" type="file" accept="image/*"></div>
+        <div class="field full"><label for="fDescripcion">Descripción</label><textarea id="fDescripcion" maxlength="600"></textarea></div>
+        <div class="form-subtitle">Precios en soles (S/)</div>
+        <div class="field"><label for="fUnidad">Precio unitario</label><input id="fUnidad" type="number" min="0" step=".01" placeholder="Ej. 10.00"></div>
+        <div class="field"><label for="fCuarto">Precio por cuarto</label><input id="fCuarto" type="number" min="0" step=".01" placeholder="Ej. 27.00"></div>
+        <div class="field"><label for="fDocena">Precio por docena</label><input id="fDocena" type="number" min="0" step=".01" placeholder="Ej. 55.00"></div>
+        <div class="field"><label for="fWeb">Precio mostrado en tienda</label><input id="fWeb" type="number" min="0" step=".01" placeholder="Opcional"></div>
+        <div class="form-subtitle">Existencias por talla (unidades)</div>
+        <div class="field"><label for="fS">Talla S</label><input id="fS" type="number" min="0" step="1" value="0"></div>
+        <div class="field"><label for="fM">Talla M</label><input id="fM" type="number" min="0" step="1" value="0"></div>
+        <div class="field"><label for="fL">Talla L</label><input id="fL" type="number" min="0" step="1" value="0"></div>
+        <div class="field"><label for="fXL">Talla XL</label><input id="fXL" type="number" min="0" step="1" value="0"></div>
+      </div>
+      <div class="modal-actions"><button class="btn btn-light" type="button" onclick="cerrarModal()">Cancelar</button><button class="btn btn-primary" type="submit">Guardar producto</button></div>
+    </form>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const productosIniciales = [{"id":1025,"nombre":"Cachetero Dije","categoria":"cachetero","imagen":"../imagenes/CACHETERO DIJE.jpg","imagenes":["../imagenes/CACHETERO DIJE.jpg"],"precioUnidad":8,"precioCuarto":27,"precioDocena":58,"precioWeb":58,"descripcion":"💖 El cachetero dije está confeccionado en 100% algodón, diseñado para brindar suavidad, frescura y comodidad en el uso diario. Disponible en 12 colores enteros y en tallas S, M, L y XL, se adapta a cada silueta ofreciendo un ajuste cómodo y favorecedor.🌟","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1052,"nombre":"Cachetero Dije Estampado","categoria":"cachetero","imagen":"../imagenes/CACHETERO DIJE ESTAMPADO.jpg","imagenes":["../imagenes/CACHETERO DIJE ESTAMPADO.jpg"],"precioUnidad":10,"precioCuarto":34,"precioDocena":58,"precioWeb":58,"descripcion":"🌸 El cachetero dije estampado está confeccionado en 100% algodón, ofreciendo suavidad y excelente transpirabilidad. Su diseño con estampados divertidos y modernos lo convierte en una prenda única que combina comodidad y estilo. Disponible en tallas S, M, L y XL, se adapta a cada silueta brindando un ajuste cómodo y favorecedor, ideal para el uso diario. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1027,"nombre":"Cachetero Corazon","categoria":"cachetero","imagen":"../imagenes/CACHETEROCORAZON.jpg","imagenes":["../imagenes/CACHETEROCORAZON.jpg"],"precioUnidad":10,"precioCuarto":35,"precioDocena":64,"precioWeb":10,"descripcion":"💖 El cachetero corazón está confeccionado en 100% algodón, ofreciendo suavidad y transpirabilidad ideales para el uso diario. Con pretina de 7 cm de altura en la cintura y un diseño en color entero, se complementa con un delicado detalle de corazón en la parte delantera que añade un toque de dulzura y encanto a tu lencería. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1072,"nombre":"Cachetero Corazon Estampado","categoria":"cachetero","imagen":"../imagenes/CACHETEROCORAZON ESTAMPADO.jpg","imagenes":["../imagenes/CACHETEROCORAZON ESTAMPADO.jpg"],"precioUnidad":11,"precioCuarto":38,"precioDocena":70,"precioWeb":11,"descripcion":"🌺 El calzón cachetero estampado de flores está confeccionado en suave algodón para ofrecer comodidad y frescura durante todo el día. Su elástico de 2.5 cm en la cintura se adapta perfectamente a tu figura sin apretar, mientras que el diseño recubierto en las piernas evita marcas en la piel y permite moverte con total libertad. Un toque floral que transforma cada día en algo especial. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1029,"nombre":"Cachetero Blonda","categoria":"cachetero","imagen":"../imagenes/CACHETERO BLONDA.jpg","imagenes":["../imagenes/CACHETERO BLONDA.jpg"],"precioUnidad":null,"precioCuarto":null,"precioDocena":null,"precioWeb":64.0,"descripcion":"","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1028,"nombre":"Cachetero Blonda Con Logo","categoria":"cachetero","imagen":"../imagenes/CACHETERO BLONDA CON LOGO.jpg","imagenes":["../imagenes/CACHETERO BLONDA CON LOGO.jpg"],"precioUnidad":11,"precioCuarto":38,"precioDocena":70,"precioWeb":11,"descripcion":"💎 El cachetero de blonda con logo exclusivo Marbellín une comodidad y elegancia en una prenda especial. Confeccionado en microfibra de alta calidad, ofrece un calce suave con elástico en la cintura y un delicado dije en forma de corazón. Su interior 100% algodón aporta frescura, mientras que sus colores reactivos mantienen un tono vibrante y duradero. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1048,"nombre":"Semi Señorial Juvenil","categoria":"semihilo","imagen":"../imagenes/SEMI SEÑORIAL JUVENIL.jpg","imagenes":["../imagenes/SEMI SEÑORIAL JUVENIL.jpg"],"precioUnidad":null,"precioCuarto":null,"precioDocena":null,"precioWeb":73.0,"descripcion":"","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1049,"nombre":"Señorial Floreado","categoria":"otros","imagen":"../imagenes/SEÑORIAL FLOREADO.jpg","imagenes":["../imagenes/SEÑORIAL FLOREADO.jpg"],"precioUnidad":null,"precioCuarto":null,"precioDocena":null,"precioWeb":76.0,"descripcion":"","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1050,"nombre":"Encaje Atras","categoria":"otros","imagen":"../imagenes/ENCAJE ATRAS.jpg","imagenes":["../imagenes/ENCAJE ATRAS.jpg"],"precioUnidad":null,"precioCuarto":null,"precioDocena":null,"precioWeb":70.0,"descripcion":"","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1022,"nombre":"Bikini Clasico","categoria":"bikini","imagen":"../imagenes/BIKINI CLASICO.jpg","imagenes":["../imagenes/BIKINI CLASICO.jpg"],"precioUnidad":9,"precioCuarto":25.5,"precioDocena":55,"precioWeb":55,"descripcion":"🌸 Bikini Clásico: un diseño atemporal con delicado sesgo alrededor y lazo central que realza su encanto. Confeccionado en algodón de alta calidad, ofrece comodidad, durabilidad y un ajuste perfecto. Disponible en 12 colores vibrantes para combinar con tu estilo único. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1020,"nombre":"Bikini Animal Print","categoria":"bikini","imagen":"../imagenes/BIKINI ANIMAL PRINK.jpg","imagenes":["../imagenes/BIKINI ANIMAL PRINK.jpg"],"precioUnidad":10,"precioCuarto":26,"precioDocena":62,"precioWeb":62,"descripcion":"🌟 Descubre la comodidad y el glamour del Bikini Animal Print en 100% algodón. Un estampado salvaje, suave y fresco que resalta tu estilo. Elige entre 12 vibrantes colores y luce siempre irresistible. 💖","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1019,"nombre":"Bikini Estrella","categoria":"bikini","imagen":"../imagenes/BIKINI ESTRELLA.jpg","imagenes":["../imagenes/BIKINI ESTRELLA.jpg"],"precioUnidad":null,"precioCuarto":null,"precioDocena":null,"precioWeb":63.0,"descripcion":"","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1024,"nombre":"Bikini Blonda","categoria":"bikini","imagen":"../imagenes/BIKINI BLONDA.jpg","imagenes":["../imagenes/BIKINI BLONDA.jpg"],"precioUnidad":9,"precioCuarto":24,"precioDocena":58,"precioWeb":9,"descripcion":"🌸 Una prenda pensada para realzar tu feminidad. El Bikini Blonda combina delicadeza y frescura con un detalle de encaje que enamora. Hecho en 100% algodón y disponible en 12 colores, es el equilibrio ideal entre comodidad y estilo. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1033,"nombre":"Bikini Pretina Ancha","categoria":"bikini","imagen":"../imagenes/BIKINI PRETINA ANCHA.jpg","imagenes":["../imagenes/BIKINI PRETINA ANCHA.jpg"],"precioUnidad":10,"precioCuarto":26,"precioDocena":62,"precioWeb":10,"descripcion":"🌟 Bikini Pretina Ancha: comodidad y estilo en un solo diseño. Su pretina ancha moldea suavemente tu silueta y realza la cintura, brindando soporte y libertad de movimiento. Confeccionado con materiales de alta calidad, es perfecto para la playa, la piscina o un look veraniego único.👙","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1026,"nombre":"Semi Hilo Clasico","categoria":"semihilo","imagen":"../imagenes/SEMI HILO CLASICO.jpg","imagenes":["../imagenes/SEMI HILO CLASICO.jpg"],"precioUnidad":10,"precioCuarto":27,"precioDocena":55,"precioWeb":55,"descripcion":"🌸 El semi hilo clásico combina sencillez y encanto en un diseño inspirado en el bikini clásico, con acabado semi hilo que realza la silueta. Confeccionado en microfibra suave para un calce cómodo, luce un delicado lazo al centro que aporta un toque femenino y coqueto.❤️","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1031,"nombre":"Semi Hilo Dije","categoria":"semihilo","imagen":"../imagenes/SEMI HILO DIJE.jpg","imagenes":["../imagenes/SEMI HILO DIJE.jpg"],"precioUnidad":10,"precioCuarto":21,"precioDocena":50,"precioWeb":8,"descripcion":"💎 El semi hilo dije combina sensualidad y comodidad en una sola prenda. Confeccionado en microfibra suave, ofrece un calce ligero que realza la figura, con diseño posterior semi hilo para un toque atrevido sin perder confort. El delicado dije en forma de corazón resalta el estilo de Marbellín, mientras su interior 100% algodón aporta frescura y suavidad. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1032,"nombre":"Semi Hilo Pretina Ancha","categoria":"semihilo","imagen":"../imagenes/SEMI HILO PRETINA ANCHA.jpg","imagenes":["../imagenes/SEMI HILO PRETINA ANCHA.jpg"],"precioUnidad":10,"precioCuarto":27.5,"precioDocena":55,"precioWeb":9,"descripcion":"🌷 El semi hilo pretina ancha combina estilo y confort en una prenda esencial. Confeccionado en 100% algodón, ofrece suavidad y frescura inigualables. Su pretina de 5 cm en la cintura brinda sujeción cómoda, mientras el elástico plano en las piernas garantiza un ajuste delicado sin marcar la piel. ✨","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1003,"nombre":"Topsito Olimpico","categoria":"topsito","imagen":"../imagenes/TOPSITO OLIMPICO.jpg","imagenes":["../imagenes/TOPSITO OLIMPICO.jpg"],"precioUnidad":10,"precioCuarto":27,"precioDocena":67,"precioWeb":67,"descripcion":"Topsito de estilo deportivo tipo olímpico, diseñado para brindar soporte firme y comodidad durante todo el día, combinando practicidad y un toque moderno.","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1002,"nombre":"Topsito Con Tirante","categoria":"topsito","imagen":"../imagenes/TOPSITO CON TIRANTE.jpg","imagenes":["../imagenes/TOPSITO CON TIRANTE.jpg"],"precioUnidad":10,"precioCuarto":27,"precioDocena":67,"precioWeb":67,"descripcion":"Topsito cómodo con tirantes ajustables, ideal para el uso diario. Ofrece un ajuste perfecto y realza la figura con sutileza.","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1001,"nombre":"Topsito Clasico","categoria":"topsito","imagen":"../imagenes/TOPSITO CLASICO.jpg","imagenes":["../imagenes/TOPSITO CLASICO.jpg"],"precioUnidad":10,"precioCuarto":27,"precioDocena":67,"precioWeb":67,"descripcion":"Topsito de corte clásico, esencial para cualquier guardarropa íntimo. Su diseño simple y elegante lo convierte en una prenda versátil y atemporal.","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1007,"nombre":"Bikini Blondita Completa","categoria":"bikini","imagen":"../imagenes/BIKINI MINI BLONDITA COMPLETA.jpg","imagenes":["../imagenes/BIKINI MINI BLONDITA COMPLETA.jpg"],"precioUnidad":10,"precioCuarto":27,"precioDocena":65,"precioWeb":10,"descripcion":"✨ Descubre el encanto del Bikini Mini Blonda: 100% algodón, frescura incomparable y un delicado acabado de blonda que rodea toda la prenda. Elegancia y comodidad en 12 irresistibles colores. 🌸","tallas":{"S":0,"M":0,"L":0,"XL":0}},{"id":1034,"nombre":"Bikini Gitana","categoria":"bikini","imagen":"../../assets/categoria/Bikini/bikini-gitana-1.jpg","imagenes":["../../assets/categoria/Bikini/bikini-gitana-1.jpg"],"precioUnidad":12,"precioCuarto":31,"precioDocena":74,"precioWeb":12,"descripcion":"✨ BIKINI GITANA: 100% ALGODÓN, SUAVE Y DELICADO CON TU PIEL. DISEÑO CON BLONDA A LOS COSTADOS, SESGO EN LA CINTURA Y SUTIL TUL DELANTERO QUE APORTA ELEGANCIA Y FEMINIDAD. CONFECCIONADO CON CUIDADO PARA BRINDAR COMODIDAD Y RESISTENCIA.❤️","tallas":{"S":0,"M":0,"L":0,"XL":0}}]
+const STORAGE_KEY = "marbellinInventarioV2";
+let productos = [];
+let editandoId = null;
+
+function leerJSON(key){try{return JSON.parse(localStorage.getItem(key)||"null")}catch{return null}}
+function normalizarProducto(p){
+  const t=p.tallas||{};
+  return {
+    id:Number(p.id), nombre:p.nombre||"Producto sin nombre", categoria:p.categoria||"bikini",
+    imagen:p.imagen||((p.imagenes||[])[0]||""), descripcion:p.descripcion||"",
+    precioUnidad:valor(p.precioUnidad), precioCuarto:valor(p.precioCuarto),
+    precioDocena:valor(p.precioDocena), precioWeb:valor(p.precioWeb??p.precio),
+    tallas:{S:Number(t.S)||0,M:Number(t.M)||0,L:Number(t.L)||0,XL:Number(t.XL)||0}
+  };
+}
+function valor(v){return v===null||v===undefined||v===""?null:Number(v)}
+function iniciar(){
+  const guardados=leerJSON(STORAGE_KEY);
+  if(Array.isArray(guardados)){productos=guardados.filter(p=>["bikini","cachetero","semihilo"].includes(String(p.categoria||"").toLowerCase())).map(normalizarProducto)}
+  else{
+    const legacy=leerJSON("productoadmin");
+    productos=productosIniciales.filter(p=>["bikini","cachetero","semihilo"].includes(String(p.categoria||"").toLowerCase())).map(normalizarProducto);
+    if(Array.isArray(legacy)){
+      legacy.filter(p=>["bikini","cachetero","semihilo"].includes(String(p.categoria||"").toLowerCase())).forEach(p=>{
+        const n=normalizarProducto(p), i=productos.findIndex(x=>x.id===n.id);
+        if(i>=0) productos[i]={...productos[i],...n,
+          precioUnidad:n.precioUnidad??productos[i].precioUnidad,
+          precioCuarto:n.precioCuarto??productos[i].precioCuarto,
+          precioDocena:n.precioDocena??productos[i].precioDocena,
+          precioWeb:n.precioWeb??productos[i].precioWeb,
+          imagen:n.imagen||productos[i].imagen};
+        else productos.push(n);
+      });
+    }
+    guardar();
+  }
+  renderizar();
+}
+function guardar(){productos=productos.filter(p=>["bikini","cachetero","semihilo"].includes(p.categoria));localStorage.setItem(STORAGE_KEY,JSON.stringify(productos))}
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function dinero(v){return v===null||v===undefined?"—":"S/"+Number(v).toFixed(2)}
+function total(p){return p.tallas.S+p.tallas.M+p.tallas.L+p.tallas.XL}
+function nombreCategoria(c){return ({bikini:"Bikini",cachetero:"Cachetero",semihilo:"Semi hilo"})[c]||""}
+function renderizar(){
+  const q=document.getElementById("buscar").value.trim().toLowerCase();
+  const cat=document.getElementById("filtroCategoria").value;
+  const stock=document.getElementById("filtroStock").value;
+  const filtrados=productos.filter(p=>(cat==="todas"||p.categoria===cat)&&(!q||p.nombre.toLowerCase().includes(q)||String(p.id).includes(q))&&(stock==="todos"||(stock==="agotado"?total(p)===0:total(p)>0)));
+  document.getElementById("resultadoConteo").textContent=filtrados.length+" de "+productos.length+" productos";
+  const grid=document.getElementById("productGrid");
+  if(!filtrados.length){grid.innerHTML='<div class="empty">No se encontraron productos con esos filtros.</div>'}
+  else grid.innerHTML=filtrados.map(p=>{
+    const t=total(p), state=t===0?"zero":t<10?"low":"ok", stateText=t===0?"Stock por registrar":t<10?"Stock bajo":"Disponible";
+    const img=p.imagen?`<img src="${escapeHTML(p.imagen)}" alt="${escapeHTML(p.nombre)}" loading="lazy" onerror="const box=this.closest('.product-photo');if(box){box.classList.add('no-image');this.remove();}">`:"";
+    return `<article class="product-card">
+      <div class="product-photo ${p.imagen?"":"no-image"}">${img}<span class="product-id">ID ${p.id}</span></div>
+      <div class="product-body">
+        <div><div class="category">${nombreCategoria(p.categoria)}</div><h4 class="product-name">${escapeHTML(p.nombre)}</h4></div>
+        <div class="price-grid">
+          <div class="price"><small>UNITARIO</small><b>${dinero(p.precioUnidad)}</b></div>
+          <div class="price"><small>CUARTO</small><b>${dinero(p.precioCuarto)}</b></div>
+          <div class="price"><small>DOCENA</small><b>${dinero(p.precioDocena)}</b></div>
+        </div>
+        <div class="stock-head"><span>Existencias</span><span class="stock-total">${t} unid.</span></div>
+        <div class="sizes">${["S","M","L","XL"].map(s=>`<div class="size"><small>${s}</small><b>${p.tallas[s]}</b></div>`).join("")}</div>
+        <span class="stock-state ${state}">${stateText}</span>
+        <div class="card-actions"><button class="btn btn-light" onclick="editarProducto(${p.id})">✎ Editar</button><button class="btn btn-danger" onclick="eliminarProducto(${p.id})">Eliminar</button></div>
+      </div></article>`;
+  }).join("");
+  document.getElementById("statProductos").textContent=productos.length;
+  document.getElementById("statUnidades").textContent=productos.reduce((a,p)=>a+total(p),0);
+  document.getElementById("statAgotados").textContent=productos.filter(p=>total(p)===0).length;
+  document.getElementById("statCategorias").textContent=new Set(productos.map(p=>p.categoria)).size;
+}
+function abrirNuevo(){
+  editandoId=null;document.getElementById("productoForm").reset();
+  document.getElementById("fId").disabled=false;
+  ["fS","fM","fL","fXL"].forEach(id=>document.getElementById(id).value=0);
+  document.getElementById("modalTitle").textContent="Agregar producto";
+  document.getElementById("modalBackdrop").classList.add("open");
+}
+function editarProducto(id){
+  const p=productos.find(x=>x.id===id);if(!p)return;editandoId=id;
+  document.getElementById("productoForm").reset();
+  document.getElementById("fId").value=p.id;document.getElementById("fId").disabled=true;
+  document.getElementById("fNombre").value=p.nombre;document.getElementById("fCategoria").value=p.categoria;
+  document.getElementById("fDescripcion").value=p.descripcion||"";
+  document.getElementById("fUnidad").value=p.precioUnidad??"";
+  document.getElementById("fCuarto").value=p.precioCuarto??"";
+  document.getElementById("fDocena").value=p.precioDocena??"";
+  document.getElementById("fWeb").value=p.precioWeb??"";
+  ["S","M","L","XL"].forEach(s=>document.getElementById("f"+s).value=p.tallas[s]||0);
+  document.getElementById("fImagen").value="";
+  document.getElementById("modalTitle").textContent="Editar producto · "+p.id;
+  document.getElementById("modalBackdrop").classList.add("open");
+}
+function cerrarModal(){document.getElementById("modalBackdrop").classList.remove("open");document.getElementById("fId").disabled=false}
+function cerrarModalSiFondo(e){if(e.target.id==="modalBackdrop")cerrarModal()}
+function avisar(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>t.style.display="none",2600)}
+document.getElementById("productoForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const id=Number(document.getElementById("fId").value),nombre=document.getElementById("fNombre").value.trim();
+  const duplicado=productos.some(p=>p.id===id&&p.id!==editandoId);
+  if(duplicado){avisar("Ese ID ya está registrado.");return}
+  let p=editandoId===null?{id,nombre,categoria:"bikini",imagen:"",descripcion:"",precioUnidad:null,precioCuarto:null,precioDocena:null,precioWeb:null,tallas:{S:0,M:0,L:0,XL:0}}:productos.find(x=>x.id===editandoId);
+  p.nombre=nombre;p.categoria=document.getElementById("fCategoria").value;p.descripcion=document.getElementById("fDescripcion").value.trim();
+  p.precioUnidad=valor(document.getElementById("fUnidad").value);p.precioCuarto=valor(document.getElementById("fCuarto").value);p.precioDocena=valor(document.getElementById("fDocena").value);p.precioWeb=valor(document.getElementById("fWeb").value);
+  ["S","M","L","XL"].forEach(s=>p.tallas[s]=Math.max(0,Number(document.getElementById("f"+s).value)||0));
+  const file=document.getElementById("fImagen").files[0];
+  if(file){p.imagen=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+  if(editandoId===null)productos.push(p);
+  guardar();cerrarModal();renderizar();avisar(editandoId===null?"Producto agregado correctamente.":"Producto actualizado correctamente.");
+});
+function eliminarProducto(id){
+  const p=productos.find(x=>x.id===id);if(!p)return;
+  if(!confirm(`¿Eliminar ${p.nombre} (ID ${id}) del inventario?`))return;
+  productos=productos.filter(x=>x.id!==id);guardar();renderizar();avisar("Producto eliminado.");
+}
+function cerrarSesion(){sessionStorage.removeItem('accesoAdmin');sessionStorage.removeItem('adminSession');sessionStorage.removeItem('adminReturnUrl');window.location.replace('../../index.html')}
+
+// Menú y fotografía compartidos con el panel principal.
+(()=>{
+ const menu=document.getElementById('adminSideMenu');
+ const backdrop=document.getElementById('adminSideBackdrop');
+ const toggle=document.getElementById('adminMenuButton');
+ const close=document.getElementById('adminMenuClose');
+ const avatarImg=document.getElementById('adminAvatar');
+ const fallback=document.querySelector('.admin-avatar-fallback');
+ const displayName=document.getElementById('adminDisplayName');
+ const abrir=()=>{menu.classList.add('open');backdrop.classList.add('visible');toggle.style.visibility='hidden';toggle.setAttribute('aria-expanded','true')};
+ const cerrar=()=>{menu.classList.remove('open');backdrop.classList.remove('visible');toggle.style.visibility='visible';toggle.setAttribute('aria-expanded','false')};
+ toggle.addEventListener('click',abrir);close.addEventListener('click',cerrar);backdrop.addEventListener('click',cerrar);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar()});
+ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',cerrar));
+ try{const foto=localStorage.getItem('marbellinAdminPhoto');if(foto){avatarImg.src=foto;avatarImg.style.display='block';fallback.style.display='none';document.getElementById('adminAvatarButton').classList.add('has-photo')}if(displayName)displayName.textContent=localStorage.getItem('marbellinAdminName')||'Administrador'}catch(e){}
+})();
+
+iniciar();
+</script>
+</body>
+</html>
