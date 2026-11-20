@@ -1,0 +1,361 @@
+/* =============================
+   Estilos generales del main tarifas-envio
+============================= */
+main.tarifas-envio {
+    max-width: 950px; 
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* =============================
+   Título principal (h1)
+============================= */
+main.tarifas-envio h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #c70039;
+}
+
+/* =============================
+   Subtítulos (h2, h3)
+============================= */
+main.tarifas-envio h2,
+main.tarifas-envio h3 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+main.tarifas-envio h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #f8bbd0;
+    padding-bottom: 5px;
+    color: #880e4f;
+}
+
+main.tarifas-envio h3 {
+    font-size: 1.3rem;
+    color: #ff1493;
+}
+
+/* =============================
+   Párrafos y listas
+============================= */
+main.tarifas-envio p,
+main.tarifas-envio ul,
+main.tarifas-envio ul li {
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #000;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* =============================
+   Tabla de Tarifas de Envío – Diseño moderno
+============================= */
+main.tarifas-envio table {
+    width: 100%;
+    border-collapse: separate; /* permite bordes redondeados */
+    border-spacing: 0;
+    margin: 18px auto;
+    font-size: 0.88rem; /* ligeramente más pequeña */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* =============================
+   Tabla de Tarifas de Envío – Filas uniformes sin hover
+============================= */
+main.tarifas-envio table {
+    width: 100%; /* ancho completo en computadoras */
+    border-collapse: collapse;
+    margin: 18px auto;
+    font-size: 0.88rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    table-layout: fixed;
+    border: 1px solid #000; /* borde general negro */
+}
+
+/* Encabezado */
+main.tarifas-envio thead th {
+    background-color: #ff85a2; /* rosa melocotón */
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 8px;
+    text-transform: uppercase;
+    border: 1px solid #000; /* borde negro */
+    height: 45px; /* altura uniforme encabezado */
+}
+
+/* Anchos de columnas */
+main.tarifas-envio thead th:nth-child(1),
+main.tarifas-envio tbody td:nth-child(1),
+main.tarifas-envio thead th:nth-child(2),
+main.tarifas-envio tbody td:nth-child(2) {
+    width: 28%;
+}
+
+main.tarifas-envio thead th:nth-child(3),
+main.tarifas-envio tbody td:nth-child(3) {
+    width: 44%;
+}
+
+/* Celdas del cuerpo – color uniforme */
+main.tarifas-envio tbody td {
+    background-color: #ffe4ec; /* color uniforme para todas las filas */
+    padding: 10px 8px;
+    border: 1px solid #000; /* borde negro */
+    color: #000;
+    text-align: center;
+    height: 50px; /* altura uniforme para cada fila */
+    vertical-align: middle; /* centrado vertical */
+}
+
+/* Ajuste de la celda con rowspan para que coincida con el color y altura */
+main.tarifas-envio tbody td[rowspan="3"] {
+    background-color: #ffe4ec;
+    height: 150px; /* altura total de las tres filas */
+}
+
+/* Texto centrado en todo */
+main.tarifas-envio table th,
+main.tarifas-envio table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* =============================
+   Nota
+============================= */
+main.tarifas-envio .note {
+    margin-top: 18px;
+    padding: 10px 12px;
+    background-color: #fff0f6;
+    border-left: 4px solid #c70039;
+    font-weight: 500;
+    color: #000;
+}
+
+/* =============================
+   Sección de envíos – contenedor
+============================= */
+main.tarifas-envio .envios-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 25px;
+    padding: 10px;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    background-color: #ffe6f0;
+    flex-wrap: nowrap;
+    min-height: 100px;
+    text-align: center;
+}
+
+main.tarifas-envio .envios-container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px;
+}
+
+/* Envío Lima – texto unido */
+main.tarifas-envio .envio-lima p,
+main.tarifas-envio .envio-lima h2 {
+    margin: 0;
+    line-height: 1.2;
+}
+
+main.tarifas-envio .envio-lima {
+    gap: 4px;
+}
+
+main.tarifas-envio .envio-lima h2 {
+    color: #ff69b4;
+    font-weight: bold;
+}
+
+/* Imagen del motorizado */
+main.tarifas-envio .motorizado img {
+    width: 160px;
+    height: auto;
+    margin-top: 4px;
+}
+
+/* Icono WhatsApp pequeño y alineado con número */
+main.tarifas-envio .whatsapp-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+main.tarifas-envio .whatsapp-line img {
+    width: 20px;
+    height: auto;
+}
+
+main.tarifas-envio .whatsapp-line a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+/* =============================
+   Medios de entrega con figure y figcaption
+============================= */
+main.tarifas-envio ul.medios-entrega {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+main.tarifas-envio ul.medios-entrega li figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+main.tarifas-envio ul.medios-entrega li img {
+    width: 320px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+main.tarifas-envio ul.medios-entrega li figcaption {
+    margin-top: 3px;
+    font-weight: bold; /* negrita */
+    font-size: 1rem;
+    color: #c70039; /* color destacado */
+    font-family: 'Georgia', serif; /* tipografía distinta */
+}
+
+/* Frase llamativa debajo de las imágenes de envío */
+main.tarifas-envio .frase-envios {
+    text-align: center;
+    font-style: italic;
+    color: #880e4f;
+    margin: 12px 0;
+    font-size: 0.95rem;
+}
+
+/* =============================
+   Responsive – móviles y tablets
+============================= */
+@media screen and (max-width: 768px) {
+    /* Títulos */
+    main.tarifas-envio h1 {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    main.tarifas-envio h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    main.tarifas-envio h3 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    /* Tabla de Tarifas */
+    main.tarifas-envio table {
+        font-size: 0.60rem; /* tamaño más legible en móviles */
+        width: 100%;
+    }
+
+    main.tarifas-envio thead th,
+    main.tarifas-envio tbody td {
+        padding: 6px 4px;
+        height: 40px; /* filas uniformes en tablet/móvil */
+        border: 1px solid #000; /* bordes negros */
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    main.tarifas-envio tbody td[rowspan="3"] {
+        height: 120px; /* altura total de las 3 filas en móviles */
+    }
+
+    /* Contenedor de envíos */
+    main.tarifas-envio .envios-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 12px;
+        padding: 6px;
+        min-height: 80px;
+    }
+
+    main.tarifas-envio .envios-container > div {
+        padding: 4px;
+    }
+
+    /* Texto dentro de los bloques de envío */
+    main.tarifas-envio .envio-lima p,
+    main.tarifas-envio .envio-lima h2,
+    main.tarifas-envio .envio-provincia p,
+    main.tarifas-envio .envio-provincia h3 {
+        font-size: 0.65rem;
+        text-align: center;
+    }
+
+    /* Imagen del motorizado */
+    main.tarifas-envio .motorizado img {
+        width: 60px;
+        height: auto;
+    }
+
+    /* WhatsApp */
+    main.tarifas-envio .whatsapp-line a {
+        font-size: 0.7rem;
+    }
+
+    main.tarifas-envio .whatsapp-line img {
+        width: 18px;
+        height: auto;
+    }
+
+    /* Medios de entrega – imágenes siempre horizontales */
+    main.tarifas-envio ul.medios-entrega {
+        flex-direction: row; /* mantenemos al costado */
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main.tarifas-envio ul.medios-entrega li img {
+        width: 190px;
+        height: auto;
+    }
+
+    main.tarifas-envio ul.medios-entrega li figcaption {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+}

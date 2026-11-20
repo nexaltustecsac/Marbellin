@@ -1,0 +1,132 @@
+/* =============================
+   Estilos generales del main tarifas-envio
+============================= */
+main.tarifas-envio {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Playfair Display', serif;
+    color: #880e4f;
+    line-height: 1.6;
+}
+
+main.tarifas-envio h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #c70039;
+}
+
+main.tarifas-envio h2 {
+    font-size: 1.5rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f8bbd0;
+    padding-bottom: 5px;
+}
+
+main.tarifas-envio p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+main.tarifas-envio ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+main.tarifas-envio ul li {
+    margin-bottom: 8px;
+}
+
+/* =============================
+   Tabla de Tarifas de Envío
+============================= */
+main.tarifas-envio table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+main.tarifas-envio thead th {
+    background-color: #f8bbd0;
+    color: #880e4f;
+    padding: 12px 10px;
+    font-weight: 700;
+    border: 1px solid #e0e0e0;
+}
+
+main.tarifas-envio tbody td {
+    padding: 12px 10px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+main.tarifas-envio tbody tr:nth-child(even) {
+    background-color: #fff0f6;
+}
+
+/* =============================
+   Nota
+============================= */
+main.tarifas-envio .note {
+    margin-top: 20px;
+    padding: 12px 15px;
+    background-color: #fff0f6;
+    border-left: 4px solid #c70039;
+    font-weight: 500;
+}
+
+/* =============================
+   Contacto
+============================= */
+main.tarifas-envio .contacto {
+    margin-top: 30px;
+    padding: 15px 20px;
+    background-color: #fce4ec;
+    border-radius: 10px;
+    text-align: center;
+}
+
+main.tarifas-envio .contacto p {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+main.tarifas-envio .contacto a {
+    color: #c70039;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+main.tarifas-envio .contacto a:hover {
+    text-decoration: underline;
+}
+
+/* =============================
+   Responsive – móviles
+============================= */
+@media screen and (max-width: 768px) {
+    main.tarifas-envio {
+        padding: 0 15px;
+        margin: 25px auto;
+    }
+
+    main.tarifas-envio h1 {
+        font-size: 1.8rem;
+    }
+
+    main.tarifas-envio h2 {
+        font-size: 1.3rem;
+    }
+
+    main.tarifas-envio table, 
+    main.tarifas-envio thead th, 
+    main.tarifas-envio tbody td {
+        font-size: 0.95rem;
+    }
+}
+

@@ -1,0 +1,212 @@
+/* Card principal */
+.contenedor-usuario {
+  width: 100%;
+  max-width: 750px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #f5c2d7;
+  margin: 30px auto;
+  animation: fadeIn .4s ease;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Encabezado */
+.contenedor-usuario .form-header {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  border-bottom: 2px solid #f8d7e3;
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+}
+
+.contenedor-usuario .form-header h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #b30059;
+  margin: 0;
+  text-align: center;
+}
+
+/* Botón X (cerrar edición) */
+.contenedor-usuario .btn-cerrar-edicion {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 26px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #a1a1a1;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  transition: all .2s ease;
+}
+
+.contenedor-usuario .btn-cerrar-edicion:hover {
+  background: rgba(236,72,153,0.12);
+  color: #cc0066;
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* Campos: básicos y ubicación */
+.contenedor-usuario .dato-usuario {
+  margin-bottom: 18px;
+}
+
+.contenedor-usuario .dato-usuario label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #6b2145;
+}
+
+/* Todos los campos, selects y spans iguales */
+.contenedor-usuario input,
+.contenedor-usuario select,
+.contenedor-usuario .texto-lectura-ubicacion {
+  width: 100%;
+  padding: 12px 14px;
+  height: 44px;
+  line-height: 20px;
+  border: 1px solid #e3b2c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: block;
+  box-sizing: border-box;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+/* Modo lectura: fondo ligero */
+.contenedor-usuario .texto-lectura-ubicacion,
+.contenedor-usuario input:disabled {
+  background: #fff5f9;
+  color: #4a4a4a;
+}
+
+/* Inputs y selects en edición */
+.contenedor-usuario input:not(:disabled),
+.contenedor-usuario select {
+  background: #fff;
+  color: #333;
+}
+
+/* Focus */
+.contenedor-usuario input:focus,
+.contenedor-usuario select:focus {
+  outline: none;
+  border-color: #cc0066;
+  box-shadow: 0 0 0 3px rgba(236,72,153,.25);
+}
+
+/* Botones */
+.contenedor-usuario .botones-edicion {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 26px;
+}
+
+/* Botones dentro de .botones-edicion */
+.contenedor-usuario .botones-edicion button {
+  border: none;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .25s ease;
+  text-align: center;
+  width: 100%;      /* ocupa todo el ancho de la celda */
+  box-sizing: border-box;
+  background: #ec4899; /* rosa unificado */
+  color: #fff;
+}
+
+.contenedor-usuario .botones-edicion button:hover {
+  background: #db2777; /* rosa intenso hover */
+}
+
+/* Grupo de edición (Guardar / Cancelar) */
+.contenedor-usuario .grupo-edicion {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos botones iguales */
+  gap: 10px;
+  grid-column: span 2; /* ocupa toda la fila */
+}
+
+.contenedor-usuario .grupo-edicion button {
+  width: 100%; /* ocupa todo el ancho de su celda */
+}
+
+
+
+/* --- Toasts elegantes --- */
+.toast {
+  position: fixed;
+  top: 20px;                /* posición superior */
+  left: 50%;                /* centrado horizontal */
+  transform: translateX(-50%) translateY(-20px); /* animación desde arriba */
+  min-width: 280px;
+  max-width: 90%;
+  background: #ec4899;      /* rosa por defecto */
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 9999;
+}
+
+.toast.exito {
+  background: #ec4899; /* rosa */
+}
+
+.toast.error {
+  background: #f43f5e; /* rojo */
+}
+
+.toast i {
+  font-style: normal; /* para usar emojis o iconos de texto */
+  font-size: 1.2rem;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Animación de salida */
+.toast.oculto {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px);
+}
+
+
+
+/* Responsive: en móviles 1 columna */
+@media (max-width: 100%) {
+  .contenedor-usuario .botones-edicion {
+    grid-template-columns: 1fr; /* cada botón ocupa toda la fila */
+  }
+  .contenedor-usuario .grupo-edicion {
+    grid-template-columns: 1fr; /* botones verticales iguales */
+  }
+}

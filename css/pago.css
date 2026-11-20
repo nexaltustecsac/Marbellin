@@ -1,0 +1,370 @@
+/* Checkout Wrapper */
+.checkout-wrapper {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    height: 90vh; /* Altura fija */
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Barra de progreso */
+.checkout-wrapper .barra-progreso {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.checkout-wrapper .barra-progreso::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+    background: #eee;
+    z-index: 0;
+    transform: translateY(-50%);
+}
+
+.checkout-wrapper .barra-progreso .paso {
+    width: 44px;
+    height: 44px;
+    background: #ddd;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 44px;
+    font-weight: bold;
+    color: #555;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.checkout-wrapper .barra-progreso .paso.activo {
+    background: #ff69b4;
+    color: #fff;
+    transform: scale(1.15);
+}
+
+/* Formulario Pasos */
+.checkout-wrapper .formulario-pasos {
+    flex: 1 1 65%;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    height: 750px;
+    min-height: 750px;
+    max-height: 750px;
+    overflow: hidden; 
+}
+
+.formulario-paso {
+    display: none;
+    flex-direction: column;
+}
+
+.formulario-paso.activo {
+    display: flex;
+}
+
+.formulario-paso h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin: 0.5rem 0 0.2rem;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:disabled {
+    background-color: #f0f0f0;
+}
+
+/* --------------------------
+   Botones
+-------------------------- */
+.boton-entrega {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+    color: #333;
+    font-weight: bold;
+    transition: background 0.3s;
+    flex: 1 1 calc(50% - 0.5rem); /* Dos botones por fila con espacio */
+    text-align: center;
+}
+
+.boton-entrega.activo {
+    background-color: #ff69b4;
+    color: #fff;
+}
+
+.botones-finales {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.botones-finales button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff69b4;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s;
+    flex: 1 1 calc(50% - 0.5rem); /* Dos botones por fila */
+}
+
+.botones-finales button:hover {
+    background-color: #ff1493;
+}
+
+button.oculto {
+    display: none;
+}
+
+/* Resumen */
+.checkout-wrapper .formulario-resumen {
+    flex: 1 1 30%;
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 750px;
+    min-height: 750px;
+    max-height: 750px;
+}
+
+.checkout-wrapper .formulario-resumen .formulario-contenido {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0; 
+}
+
+.checkout-wrapper .formulario-resumen h2 {
+    margin-bottom: 1.4rem;
+    font-size: 1.2rem;
+    color: #c94c8c;
+    font-weight: 750;
+   font-family: 'Playfair Display', serif;
+   text-transform: uppercase;
+    text-align: center;
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;    
+    margin-bottom: 0rem;
+    box-sizing: border-box;
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ff69b4 #f1f1f1;
+    padding-right: 0; 
+    margin-right: 0;  
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen::-webkit-scrollbar {
+    width: 2.5px; 
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 1.5px;
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 1.5px;
+}
+
+.checkout-wrapper .formulario-resumen .formulario-total {
+    margin-top: auto;
+    padding-top: 0.8rem;
+    border-top: 1px solid #eee;
+    text-align: center; 
+    font-weight: 750;
+}
+
+/* Imagen */
+.checkout-wrapper .item-resumen {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 0.6px solid #eee;
+    padding-bottom: 0rem;
+    align-items: center;
+}
+
+.checkout-wrapper .item-resumen img {
+    width: 86px;
+    height: 86px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.checkout-wrapper .item-resumen p {
+    margin: 0.25rem 0;
+    font-size: 0.86rem;
+    text-align: center;
+    flex: 1;
+}
+
+/* --------------------------
+   Campos ocultos
+-------------------------- */
+.oculto {
+    display: none;
+}
+
+
+
+
+
+
+/* Contenedor de la tarjeta de tienda */
+.tienda-tarjeta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Imagen de la tienda */
+.tienda-img {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto hover en la imagen */
+.tienda-img:hover {
+    transform: scale(1.03);
+}
+
+/* Dirección de la tienda */
+.tienda-direccion {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+/* Oculto por defecto */
+.oculto {
+    display: none;
+}
+
+/* Campos bloqueados (usuarios logueados) */
+#form-datos-cliente input[readonly],
+#form-datos-cliente input[disabled] {
+  background-color: #f9f9f9;
+  border: 1.5px solid #d1d1d1;
+  color: #666;
+  cursor: not-allowed;
+  position: relative;
+}
+
+/* Efecto visual sutil */
+#form-datos-cliente input[readonly]:hover,
+#form-datos-cliente input[disabled]:hover {
+  border-color: #bbb;
+}
+
+/* Icono de candado opcional a la derecha */
+#form-datos-cliente input[readonly]::after,
+#form-datos-cliente input[disabled]::after {
+  content: "🔒";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #c2185b;
+  pointer-events: none;
+}
+
+
+
+
+
+
+
+
+
+
+/* 🌸 SweetAlert2 - Estilo Marbellin */
+.swal2-popup {
+  border-radius: 1.5rem !important;
+  background-color: #fff0f5 !important;
+  color: #c2185b !important;
+  box-shadow: 0 4px 20px rgba(194, 24, 91, 0.3) !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.swal2-title {
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  color: #c2185b !important;
+}
+
+.swal2-html-container {
+  font-size: 1rem !important;
+  color: #a2185b !important;
+}
+
+.swal2-confirm {
+  background-color: #e75480 !important;
+  color: #fff !important;
+  border-radius: 1rem !important;
+  padding: 0.6rem 1.5rem !important;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(231, 84, 128, 0.4);
+  transition: all 0.3s ease;
+}
+
+.swal2-confirm:hover {
+  background-color: #d94f7b !important;
+  transform: scale(1.05);
+}
+
+
+
+
+
+
