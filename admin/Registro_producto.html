@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <script>
+  const sesionAdmin = (() => { try { return JSON.parse(sessionStorage.getItem("adminSession") || "null"); } catch (_) { return null; } })();
+  if (sessionStorage.getItem("accesoAdmin") !== "true" || sesionAdmin?.rol !== "admin") {
+    const ref = document.referrer;
+    let retorno = "../index.html";
+    try {
+      const origen = new URL(ref);
+      if (origen.origin === location.origin && !/Login-Administrador\.html$/i.test(origen.pathname) && !/Registro_producto\.html$/i.test(origen.pathname)) {
+        retorno = origen.pathname + origen.search + origen.hash;
+      }
+    } catch (_) {}
+    sessionStorage.setItem("adminReturnUrl", retorno);
+    window.location.replace("Login-Administrador.html?return=" + encodeURIComponent(retorno));
+  }
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#171417" />
+  <title>Panel Marbellin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="css/administrador .css" />
+  <link rel="stylesheet" href="css/styleadmin-pedido.css" />
+  <link rel="stylesheet" href="css/styleadmin-cliente.css" />
+  <link rel="stylesheet" href="css/panel-admin-responsive.css" />
+  <link rel="stylesheet" href="css/admin-premium.css" />
+  <link rel="stylesheet" href="css/dashboard-marbellin.css" />
+</head>
+
+<body>
+
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menú lateral">
+    <div class="sidebar-header">
+      <div class="sidebar-title">
+        <span class="material-icons" aria-hidden="true">dashboard</span>
+        Marbellín
+      </div>
+      <button class="close-btn" id="closeBtn" aria-label="Cerrar menú">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M15 18 L9 12 L15 6" />
+        </svg>
+      </button>
+    </div>
+    <a href="#" onclick="mostrarPanel('inicio')"><span class="material-icons">home</span> Inicio</a>
+    <a href="Panelproducto/admin.html"><span class="material-icons">category</span> Productos</a>
+    <a href="#" onclick="mostrarPanel('pedidos')"><span class="material-icons">shopping_cart</span> Pedidos</a>
+    <a href="#" onclick="mostrarPanel('cliente')"><span class="material-icons">people</span> Clientes</a>
+    <a href="#" onclick="mostrarPanel('estadisticas')"><span class="material-icons">bar_chart</span> Estadísticas</a>
+    <a href="#" onclick="mostrarPanel('configuracion')"><span class="material-icons">settings</span> Configuración</a>
+    <button class="sidebar-logout" type="button" onclick="cerrarSesion()"><span class="material-icons">logout</span> Cerrar sesión</button>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+  <header class="admin-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="header-spacer"></div>
+    <div class="admin-identity"><span id="adminDisplayName" class="admin-display-name">Administrador</span><span class="admin-avatar-button" id="adminAvatarButton" aria-label="Fotografía del administrador">
+      <img id="adminAvatar" src="" alt="Foto del administrador" />
+      <span class="material-icons avatar-fallback">account_circle</span>
+    </span></div>
+  </header>
+
+  <main id="mainContent">
+    <!-- Panel Inicio: dashboard profesional Marbellín -->
+    <section id="panelInicio" class="dashboard-home">
+      <div class="welcome-row">
+        <div>
+          <span class="dashboard-eyebrow">PANEL DE CONTROL</span>
+          <h1>Bienvenido de nuevo, <span id="welcomeAdminName">Administrador</span></h1>
+          <p>Este es el resumen de tu tienda Marbellín Lencería.</p>
+        </div>
+        <div class="welcome-actions">
+          <label class="dashboard-search"><span class="material-icons">search</span><input id="dashboardSearch" type="search" placeholder="Buscar en el panel..." aria-label="Buscar en el panel"></label>
+          <button class="notification-button" type="button" aria-label="Ver avisos"><span class="material-icons">notifications_none</span><i></i></button>
+          <div class="welcome-avatar"><span class="material-icons">account_circle</span></div>
+        </div>
+      </div>
+
+      <div class="brand-hero">
+        <div class="hero-image" role="img" aria-label="Imagen promocional de Marbellín Lencería"></div>
+        <div class="hero-copy">
+          <span class="hero-brand">Marbellín</span>
+          <strong>LENCERÍA</strong>
+          <em>Belleza, sensualidad y confianza</em>
+        </div>
+        <div class="hero-divider"></div>
+        <a class="hero-cta" href="Panelproducto/admin.html"><span class="material-icons">trending_up</span><span><b>Impulsa tu tienda</b><small>Administra tus productos y existencias</small></span><span class="material-icons arrow">chevron_right</span></a>
+      </div>
+
+      <div class="dashboard-metrics">
+        <article class="overview-metric metric-dark">
+          <div class="metric-top"><span class="metric-icon"><span class="material-icons">inventory_2</span></span><span class="metric-caption">CATÁLOGO</span></div>
+          <p>Productos registrados</p><strong id="homeProducts">—</strong><small>Productos en tu catálogo</small>
+        </article>
+        <article class="overview-metric">
+          <div class="metric-top"><span class="metric-icon"><span class="material-icons">widgets</span></span><span class="metric-caption">INVENTARIO</span></div>
+          <p>Unidades disponibles</p><strong id="homeUnits">—</strong><small>Suma de existencias por talla</small>
+        </article>
+        <article class="overview-metric">
+          <div class="metric-top"><span class="metric-icon"><span class="material-icons">warning_amber</span></span><span class="metric-caption">ATENCIÓN</span></div>
+          <p>Productos con poco stock</p><strong id="homeLowStock">—</strong><small>Revisa las existencias pronto</small>
+        </article>
+      </div>
+
+      <div class="dashboard-content-grid">
+        <article class="dashboard-panel-card performance-card">
+          <div class="panel-card-heading"><div><span class="dashboard-eyebrow">CONTROL DE EXISTENCIAS</span><h2>Resumen de inventario</h2><p>Distribución de unidades por talla registrada.</p></div><a href="Panelproducto/admin.html" class="outline-action">Ver inventario <span class="material-icons">arrow_forward</span></a></div>
+          <div class="inventory-chart" id="inventoryChart">
+            <div class="inventory-bar-row"><span>Talla S</span><div class="inventory-track"><i id="barS"></i></div><b id="valS">—</b></div>
+            <div class="inventory-bar-row"><span>Talla M</span><div class="inventory-track"><i id="barM"></i></div><b id="valM">—</b></div>
+            <div class="inventory-bar-row"><span>Talla L</span><div class="inventory-track"><i id="barL"></i></div><b id="valL">—</b></div>
+            <div class="inventory-bar-row"><span>Talla XL</span><div class="inventory-track"><i id="barXL"></i></div><b id="valXL">—</b></div>
+          </div>
+          <div class="chart-footnote"><span class="material-icons">info</span> Los indicadores se calculan con el inventario guardado en este navegador.</div>
+        </article>
+
+        <article class="dashboard-panel-card quick-card">
+          <div class="panel-card-heading"><div><span class="dashboard-eyebrow">ACCESOS DIRECTOS</span><h2>Tu tienda, a un clic</h2><p>Continúa con las tareas más frecuentes.</p></div></div>
+          <a class="quick-link" href="Panelproducto/admin.html"><span class="quick-icon"><span class="material-icons">shopping_bag</span></span><span><b>Productos</b><small>Fotos, precios y tallas</small></span><span class="material-icons quick-arrow">chevron_right</span></a>
+          <button class="quick-link" type="button" onclick="mostrarPanel('pedidos')"><span class="quick-icon"><span class="material-icons">receipt_long</span></span><span><b>Pedidos</b><small>Consulta el historial de compras</small></span><span class="material-icons quick-arrow">chevron_right</span></button>
+          <button class="quick-link" type="button" onclick="mostrarPanel('cliente')"><span class="quick-icon"><span class="material-icons">groups</span></span><span><b>Clientes</b><small>Administra tus clientes</small></span><span class="material-icons quick-arrow">chevron_right</span></button>
+          <button class="quick-link" type="button" onclick="mostrarPanel('configuracion')"><span class="quick-icon"><span class="material-icons">tune</span></span><span><b>Configuración</b><small>Personaliza tu panel</small></span><span class="material-icons quick-arrow">chevron_right</span></button>
+        </article>
+      </div>
+      <div class="dashboard-bottom-note"><span class="material-icons">verified_user</span><span>Panel administrativo Marbellín · Mantén tu inventario actualizado y realiza respaldos periódicos.</span></div>
+    </section>
+
+    <!-- Panel Producto -->
+    <div id="panelProductos" class="marbellin-panel" style="display: none;">
+      <h1>Inventario Inicial - Marbellín Lencería</h1>
+
+      <div class="tabla-contenedor">
+        <button id="botonExportar" onclick="exportarTablaAPDF()">Exportar a PDF</button>
+      </div>
+
+      <div class="tabla-contenedor" id="seccionPDF">
+        <table>
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Talla S</th>
+              <th>Talla M</th>
+              <th>Talla L</th>
+              <th>Talla XL</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody id="tablaProductos">
+            <!-- Filas generadas por JavaScript -->
+          </tbody>
+        </table>
+        <p id="mensajeVacio"></p>
+      </div>
+
+      <div class="formulario-contenedor">
+        <h2>Agregar Nuevo Producto</h2>
+        <form id="formularioProducto">
+          <input type="text" placeholder="ID" id="id" required />
+          <input type="text" placeholder="Nombre del producto" id="nombre" required />
+          <input type="number" placeholder="Talla S" id="s" value="0" min="0" required />
+          <input type="number" placeholder="Talla M" id="m" value="0" min="0" required />
+          <input type="number" placeholder="Talla L" id="l" value="0" min="0" required />
+          <input type="number" placeholder="Talla XL" id="xl" value="0" min="0" required />
+          <input type="number" placeholder="Precio (S/)" id="precio" min="0" step="1" required />
+
+          <label class="custom-file-input" id="labelImagen">
+            Seleccionar Imagen
+            <input type="file" accept="image/*" id="imagen" required />
+          </label>
+
+          <button type="submit">Agregar Producto</button>
+        </form>
+      </div>
+
+      <div class="formulario-cantidad-agregar">
+        <h2>Agregar Cantidad a Producto</h2>
+        <form id="formularioAgregarCantidad" class="form-horizontal">
+          <div class="grupo-campo">
+            <label for="idAgregar">ID:</label>
+            <input type="number" id="idAgregar" required />
+          </div>
+          <div class="grupo-campo">
+            <label for="tallaAgregar">Talla:</label>
+            <select id="tallaAgregar" required>
+              <option value="">Seleccione</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+          <div class="grupo-campo">
+            <label for="cantidadAgregar">Cantidad:</label>
+            <input type="number" id="cantidadAgregar" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </form>
+      </div>
+
+      <div class="formulario-cantidad-eliminar">
+        <h2>Eliminar Cantidad de Producto</h2>
+        <form id="formularioEliminarCantidad" class="form-horizontal">
+          <div class="grupo-campo">
+            <label for="idEliminar">ID:</label>
+            <input type="number" id="idEliminar" required />
+          </div>
+          <div class="grupo-campo">
+            <label for="tallaEliminar">Talla:</label>
+            <select id="tallaEliminar" required>
+              <option value="">Seleccione</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+          <div class="grupo-campo">
+            <label for="cantidadEliminar">Cantidad:</label>
+            <input type="number" id="cantidadEliminar" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-danger">
+            <i class="fas fa-minus"></i> Eliminar
+          </button>
+        </form>
+      </div>
+
+      <div class="formulario-editar-producto">
+        <h2>Editar Producto</h2>
+        <form id="formularioEditarProducto" class="form-horizontal">
+          <div class="grupo-campo">
+            <label for="idEditar">ID del producto:</label>
+            <input type="text" id="idEditar" required />
+          </div>
+          <div class="grupo-campo">
+            <label for="nombreEditar">Nuevo nombre:</label>
+            <input type="text" id="nombreEditar" />
+          </div>
+          <div class="grupo-campo">
+            <label for="sEditar">Talla S:</label>
+            <input type="number" id="sEditar" min="0" />
+          </div>
+          <div class="grupo-campo">
+            <label for="mEditar">Talla M:</label>
+            <input type="number" id="mEditar" min="0" />
+          </div>
+          <div class="grupo-campo">
+            <label for="lEditar">Talla L:</label>
+            <input type="number" id="lEditar" min="0" />
+          </div>
+          <div class="grupo-campo">
+            <label for="xlEditar">Talla XL:</label>
+            <input type="number" id="xlEditar" min="0" />
+          </div>
+          <div class="grupo-campo">
+            <label for="precioEditar">Nuevo precio:</label>
+            <input type="number" id="precioEditar" min="0" step="1" />
+          </div>
+          <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+        </form>
+      </div>
+
+      <div class="contenedorEliminarProducto" id="contenedorEliminarProducto">
+        <h2>Eliminar producto por ID</h2>
+        <form id="formularioEliminarProducto">
+          <input type="text" id="idEliminar_Producto" placeholder="ID del producto a eliminar" required />
+          <button type="submit" class="btn btn-eliminar">Eliminar producto</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Panel Pedidos -->
+    <div id="panelPedidos" style="display: none;">
+      <div class="contenedor-historial-externo">
+        <h2>Historial de Compras</h2>
+        <button id="btn-eliminar-historial" onclick="eliminarHistorial()">Eliminar Historial</button>
+
+        <div class="contenedor-historial" id="historial">
+          <!-- Aquí se cargan dinámicamente las compras -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Panel Clientes -->
+    <div id="panelClientes" style="display: none;">
+      <section>
+        <h2>Administración de Clientes</h2>
+
+        <button id="btn-eliminar-historial" onclick="eliminarHistorial()">Eliminar Historial</button>
+
+        <label for="buscadorClientes">Buscar clientes:</label>
+        <input type="text" id="buscadorClientes" placeholder="Buscar por nombre o correo...">
+
+        <div id="tablaClientesWrapper">
+          <table id="tablaClientes">
+            <thead>
+              <tr>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Región</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Aquí se insertan los clientes -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+    </div>
+
+    <section id="panelEstadisticas" class="stats-panel" style="display:none;">
+      <div class="panel-heading"><span class="panel-kicker">RESUMEN DEL NEGOCIO</span><h2>Estadísticas</h2><p>Indicadores disponibles según la información registrada actualmente.</p></div>
+      <div class="stats-cards">
+        <article class="metric-card"><span class="metric-icon">inventory_2</span><div><small>Productos registrados</small><strong id="metricProductos">0</strong><em>Catálogo actual</em></div></article>
+        <article class="metric-card"><span class="metric-icon">category</span><div><small>Categorías activas</small><strong id="metricCategorias">0</strong><em>Según productos registrados</em></div></article>
+        <article class="metric-card"><span class="metric-icon">layers</span><div><small>Unidades en inventario</small><strong id="metricUnidades">0</strong><em>Suma de tallas S, M, L y XL</em></div></article>
+        <article class="metric-card"><span class="metric-icon">remove_shopping_cart</span><div><small>Productos sin stock</small><strong id="metricAgotados">0</strong><em>Sin unidades disponibles</em></div></article>
+        <article class="metric-card"><span class="metric-icon">warning_amber</span><div><small>Productos con stock bajo</small><strong id="metricBajoStock">0</strong><em>Según el límite configurado</em></div></article>
+      </div>
+      <div class="stats-lower"><article class="stats-box"><h3>Productos por categoría</h3><div id="categoryBreakdown" class="category-breakdown"></div></article><article class="stats-box data-empty"><span class="material-icons">insights</span><h3>Ventas y actividad</h3><p>Aún no hay datos registrados de ventas, compras ni clientes. Cuando se generen operaciones, aquí se mostrarán los indicadores y su evolución.</p><span class="data-status">Pendiente de datos</span></article></div>
+    </section>
+
+    <section id="panelConfiguracion" class="settings-panel" style="display:none;">
+      <div class="settings-heading">
+        <span class="settings-eyebrow">CENTRO DE CONTROL</span>
+        <h2>Configuración</h2>
+        <p>Personaliza y administra las preferencias de tu panel Marbellín desde un solo lugar.</p>
+      </div>
+
+      <div class="settings-layout">
+        <article class="settings-card settings-profile-card">
+          <div class="settings-card-heading"><span class="material-icons">manage_accounts</span><div><h3>Perfil del administrador</h3><p>Identidad que aparece en la parte superior del panel.</p></div></div>
+          <div class="settings-profile-content">
+            <div class="profile-photo-editor"><img id="settingsAvatarPreview" src="" alt="Vista previa de la foto del administrador"><span class="material-icons settings-avatar-fallback">account_circle</span></div>
+            <div class="profile-fields"><label class="admin-name-label" for="adminNameInput">Nombre visible</label><input id="adminNameInput" class="admin-name-input" type="text" maxlength="40" placeholder="Administrador"><div class="profile-actions"><label class="photo-upload-label" for="adminPhotoInput"><span class="material-icons">photo_camera</span> Cambiar fotografía</label><input id="adminPhotoInput" type="file" accept="image/*" hidden><button type="button" class="remove-photo-button" id="removeAdminPhoto">Restablecer fotografía</button></div><small class="settings-help">Los cambios de nombre y fotografía se guardan automáticamente en este dispositivo.</small></div>
+          </div>
+        </article>
+
+        <article class="settings-card">
+          <div class="settings-card-heading"><span class="material-icons">inventory</span><div><h3>Control de inventario</h3><p>Define cuándo un producto debe considerarse con pocas existencias.</p></div></div>
+          <label class="settings-label" for="stockThresholdInput">Avisar cuando queden estas unidades o menos</label>
+          <div class="settings-inline-field"><input id="stockThresholdInput" type="number" min="0" max="999" value="3"><span>unidades por producto</span></div>
+          <small class="settings-help">Este valor sirve como referencia para identificar productos con stock bajo. No modifica las cantidades del inventario.</small>
+          <div class="settings-save-line"><span id="stockSettingStatus" class="settings-status">Preferencia guardada</span><button type="button" id="saveStockSettings" class="settings-secondary-button">Guardar preferencia</button></div>
+        </article>
+
+        <article class="settings-card settings-theme-card">
+          <div class="settings-card-heading"><span class="material-icons">palette</span><div><h3>Apariencia de todo el panel</h3><p>Elige el tema que se aplicará a las secciones administrativas.</p></div></div>
+          <div class="theme-choice-grid" role="group" aria-label="Tema del panel">
+            <button type="button" class="theme-choice" data-admin-theme="light" aria-pressed="true"><span class="theme-preview theme-preview-light"><i></i><i></i><i></i></span><strong><span class="material-icons">light_mode</span> Modo claro</strong><small>Fondos claros y acentos Marbellín.</small></button>
+            <button type="button" class="theme-choice" data-admin-theme="dark" aria-pressed="false"><span class="theme-preview theme-preview-dark"><i></i><i></i><i></i></span><strong><span class="material-icons">dark_mode</span> Modo oscuro</strong><small>Fondos oscuros y contraste cómodo.</small></button>
+          </div>
+          <small class="settings-help">La selección se guarda en este dispositivo y se conserva al cambiar de sección.</small>
+        </article>
+
+        <article class="settings-card">
+          <div class="settings-card-heading"><span class="material-icons">tune</span><div><h3>Preferencias de visualización</h3><p>Ajusta la comodidad de uso del panel administrativo.</p></div></div>
+          <label class="settings-switch-row" for="compactModeToggle"><span><strong>Vista compacta</strong><small>Reduce espacios para mostrar más información en pantalla.</small></span><input id="compactModeToggle" type="checkbox"><span class="settings-switch-ui" aria-hidden="true"></span></label>
+          <small class="settings-help">La preferencia se aplica al panel administrativo en este dispositivo.</small>
+        </article>
+
+        <article class="settings-card settings-backup-card">
+          <div class="settings-card-heading"><span class="material-icons">backup</span><div><h3>Respaldo de información</h3><p>Guarda una copia de los datos locales para poder recuperarlos.</p></div></div>
+          <div class="backup-actions"><button type="button" id="exportAdminBackup" class="settings-primary-button"><span class="material-icons">download</span> Descargar respaldo</button><label for="importAdminBackup" class="settings-secondary-button import-backup-label"><span class="material-icons">upload</span> Restaurar respaldo</label><input id="importAdminBackup" type="file" accept="application/json,.json" hidden></div>
+          <small class="settings-warning"><span class="material-icons">info</span> El respaldo incluye los datos guardados en el almacenamiento local de este navegador. Guárdalo en un lugar seguro y no lo compartas.</small>
+          <p id="backupStatus" class="settings-status" aria-live="polite">No se ha generado ningún respaldo en esta sesión.</p>
+        </article>
+      </div>
+      <div class="settings-footer-note"><span class="material-icons">devices</span><span>Estas preferencias se almacenan en el navegador de este dispositivo. Para evitar perder información, descarga respaldos periódicamente.</span></div>
+    </section>
+
+  </main>
+
+
+
+  <!-- Scripts -->
+  <script src="js/jsadmin-panel.js"></script>
+  <script src="js/dashboard-marbellin.js"></script>
+  <script src="js/jsinicioadmin.js"></script>
+  <script src="js/jsadmin-pedido.js"></script>
+  <script src="js/jsadmin-cliente.js"></script>
+  <script>
+    // Permite que los accesos del menú compartido abran directamente su sección.
+    (function(){
+      const panel=new URLSearchParams(window.location.search).get('panel');
+      const equivalencias={inicio:'inicio',pedidos:'pedidos',cliente:'cliente',estadisticas:'estadisticas',configuracion:'configuracion'};
+      if(panel && equivalencias[panel]) window.addEventListener('DOMContentLoaded',()=>mostrarPanel(equivalencias[panel]));
+    })();
+  </script>
+  <script>
+    // --- Cerrar sesión ---
+    function cerrarSesion() {
+      // El cierre administrativo siempre vuelve a la raíz pública de la tienda.
+      sessionStorage.removeItem("accesoAdmin");
+      sessionStorage.removeItem("adminSession");
+      sessionStorage.removeItem("adminReturnUrl");
+      window.location.replace("../index.html");
+    }
+  </script>
+</body>
+
+</html>
