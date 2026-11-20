@@ -1,0 +1,34 @@
+ACTUALIZACIÓN VISUAL — MARBELLÍN LENCERÍA
+
+Archivo principal del panel:
+admin/Registro_producto.html
+
+Cambios:
+- Nuevo dashboard de inicio en rosa, negro y blanco.
+- Menú lateral oscuro con estados activos y hover.
+- Cabecera de bienvenida y accesos rápidos.
+- Banner promocional usando una imagen que ya existía en el proyecto.
+- Tarjetas dinámicas de productos, unidades y stock bajo.
+- Barras de inventario por talla calculadas desde localStorage.
+- Adaptación responsive para pantallas pequeñas.
+
+Importante:
+- Se conservaron los demás archivos y módulos del proyecto.
+- No se inventan cifras de ventas ni visitantes: el inicio muestra datos reales del inventario local.
+- El inventario usa la clave localStorage "inventario" existente; la información guardada en un navegador no se transfiere automáticamente a otro.
+- Antes de reemplazar el proyecto publicado, guarda una copia de seguridad y prueba el acceso de administrador.
+
+
+ACTUALIZACIÓN DE SESIONES Y SEPARACIÓN DE ACCESOS
+- El acceso administrativo está aislado en admin/Login-Administrador.html y ya no incluye formularios de clientes ni de registro.
+- El inicio de sesión de clientes está en pages/login.html.
+- El alta de cuentas de clientes está en pages/registro.html.
+- Los enlaces “Crear cuenta” apuntan al registro independiente.
+- El cierre de sesión administrativo elimina únicamente los datos de sesión y regresa a la página desde la que se abrió el acceso administrativo (con index.html como destino de respaldo).
+- La autenticación administrativa ya no se concede desde el formulario público de clientes.
+
+CORRECCIÓN DEL INICIO DE SESIÓN ADMINISTRATIVO
+- El formulario pages/login.html ahora reconoce las credenciales administrativas.
+- Al validar correo y contraseña, crea la sesión administrativa y entra directamente a admin/Registro_producto.html.
+- Se eliminó el aviso que bloqueaba el acceso del administrador desde el formulario de inicio de sesión.
+- Las cuentas de clientes mantienen su flujo de acceso habitual.
