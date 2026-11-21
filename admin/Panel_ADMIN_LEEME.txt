@@ -1,0 +1,20 @@
+MARBELLIN — ORGANIZACIÓN DEL PANEL ADMINISTRATIVO
+
+Se conservaron todos los archivos del ZIP de origen; este cambio reorganiza nombres y referencias.
+
+OCHO MÓDULOS ADMINISTRATIVOS:
+1. Panel_dashboard.html
+2. Panel_productos.html
+3. Panel_pedidos.html
+4. Panel_cliente.html
+5. Panel_estadisticas.html
+6. Panel_distribuidora.html
+7. Panel_mensajeria.html
+8. Panel_configuracion.html
+
+LOGIN ADMINISTRADOR:
+9. Panel_login_admin.html
+
+Los módulos secundarios mantienen su comportamiento de entrada al panel central mediante el parámetro panel. La lógica compartida permanece en los archivos Panel_dashboard_*.js y los módulos de clientes y pedidos conservan sus scripts propios Panel_cliente.js y Panel_pedidos.js. Los estilos compartidos también se mantienen separados por función.
+
+No se eliminaron productos, imágenes, recursos ni archivos originales.

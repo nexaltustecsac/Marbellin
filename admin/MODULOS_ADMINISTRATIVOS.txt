@@ -1,0 +1,28 @@
+MARBELLÍN — ESTRUCTURA DE MÓDULOS ADMINISTRATIVOS
+
+Los ocho módulos conservan los nombres de sus páginas HTML y ahora cuentan
+con una hoja CSS y un archivo JS propios, con el mismo nombre base:
+
+Panel_cliente
+Panel_dashboard
+Panel_distribuidora
+Panel_configuracion
+Panel_pedidos
+Panel_productos
+Panel_estadisticas
+Panel_mensajeria
+
+Ubicación:
+- admin/Panelproducto/*.html
+- admin/css/Panel_*.css
+- admin/js/Panel_*.js
+
+El acceso de administrador también conserva sus archivos:
+- admin/Panel_login_admin.html
+- admin/css/Panel_login_admin.css
+- admin/js/Panel_login_admin.js
+
+Los archivos JS específicos de cada módulo realizan su inicialización visual
+y emiten el evento marbellin:modulo-listo. La lógica funcional compartida que
+ya existía se conserva en los controladores originales del dashboard; no se
+duplicó ni se reemplazó para evitar romper operaciones existentes.
