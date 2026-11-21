@@ -1,0 +1,36 @@
+MARBELLÍN LENCERÍA — DESPLIEGUE EN VERCEL
+
+Este proyecto es un sitio estático HTML, CSS y JavaScript. No requiere React,
+Node.js, npm install ni comando de compilación.
+
+PASOS
+1. Descomprime este ZIP.
+2. Sube la carpeta completa a un repositorio de GitHub.
+3. Entra a https://vercel.com/ e importa ese repositorio.
+4. En Project Settings > Build & Development Settings configura:
+   - Framework Preset: Other
+   - Root Directory: ./
+   - Build Command: vacío / desactivado
+   - Output Directory: ./
+   - Install Command: vacío / desactivado
+5. Pulsa Deploy.
+
+El archivo vercel.json agrega encabezados HTTP de seguridad y caché para
+los recursos estáticos. Se conserva la navegación mediante los archivos
+HTML existentes; no se fuerza una reescritura SPA.
+
+IMPORTANTE SOBRE FUNCIONALIDADES Y SEGURIDAD
+- Vercel aloja los archivos estáticos; no crea por sí solo una base de datos,
+  API, autenticación segura ni almacenamiento compartido.
+- El código actual utiliza localStorage/sessionStorage en el navegador.
+  Los datos guardados así quedan en ese navegador/dispositivo y no se
+  sincronizan automáticamente entre clientes o administradores.
+- No publiques credenciales, claves privadas ni secretos dentro de archivos
+  JavaScript/HTML. La autenticación administrativa del lado del cliente no
+  debe considerarse protección segura para producción.
+- Para pagos, pedidos, usuarios y administración multi-dispositivo se requiere
+  conectar un backend/base de datos y validar permisos en el servidor.
+- Los enlaces externos y bibliotecas CDN siguen dependiendo de sus proveedores.
+
+Se retiraron las carpetas de imágenes de las categorías antiguas "Otros" y
+"Topsito"; el catálogo JavaScript ya utiliza Bikini, Cachetero y Semihilo.
