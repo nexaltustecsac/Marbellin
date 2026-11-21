@@ -1,0 +1,36 @@
+/* Estilos propios del módulo Panel_cliente */
+/* Panel_cliente — estilos propios del módulo Marbellín.
+   Los estilos globales permanecen en los archivos base del panel. */
+#panelClientes {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+  text-align: left;
+}
+#panelClientes *, #panelClientes *::before, #panelClientes *::after { box-sizing: border-box; }
+#panelClientes :is(.section-header,.page-heading,.panel-heading,.module-heading) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-width: 0;
+}
+#panelClientes :is(input,select,textarea,button) { max-width: 100%; }
+#panelClientes :is(.table-responsive,.table-container,.data-table-wrap) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 700px) {
+  #panelClientes { padding-inline: 12px; }
+  #panelClientes :is(.section-header,.page-heading,.panel-heading,.module-heading) {
+    align-items: stretch;
+  }
+  #panelClientes :is(.section-header button,.page-heading button,.panel-heading button) {
+    max-width: 100%;
+  }
+}

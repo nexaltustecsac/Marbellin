@@ -1,0 +1,36 @@
+/* Estilos propios del módulo Panel_pedidos */
+/* Panel_pedidos — estilos propios del módulo Marbellín.
+   Los estilos globales permanecen en los archivos base del panel. */
+#panelPedidos {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+  text-align: left;
+}
+#panelPedidos *, #panelPedidos *::before, #panelPedidos *::after { box-sizing: border-box; }
+#panelPedidos :is(.section-header,.page-heading,.panel-heading,.module-heading) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-width: 0;
+}
+#panelPedidos :is(input,select,textarea,button) { max-width: 100%; }
+#panelPedidos :is(.table-responsive,.table-container,.data-table-wrap) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 700px) {
+  #panelPedidos { padding-inline: 12px; }
+  #panelPedidos :is(.section-header,.page-heading,.panel-heading,.module-heading) {
+    align-items: stretch;
+  }
+  #panelPedidos :is(.section-header button,.page-heading button,.panel-heading button) {
+    max-width: 100%;
+  }
+}
