@@ -1,0 +1,19 @@
+ACTUALIZACIÓN MARBELLÍN — LOGO, ICONOS, ACCESOS Y MÉTRICAS
+
+Se conserva la estructura y el funcionamiento existente del proyecto.
+
+Cambios aplicados:
+- En el encabezado del menú administrativo se reemplazó la letra “M” por el logotipo oficial assets/icons/logo-marbellin.png.
+- Los iconos del menú y de los accesos directos usan un rosa brillante con un resplandor sutil. El efecto se aplica al icono, no al fondo de la tarjeta.
+- Los accesos directos del dashboard mantienen el mismo fondo al pasar el cursor, enfocar o tocar; se eliminó el cambio de color de selección.
+- Las métricas del dashboard leen el mismo arreglo de productos que utiliza el catálogo administrativo, evitando mostrar cero cuando todavía no existe una copia local guardada.
+- El resumen se actualiza también después de guardar cambios en el inventario.
+
+Datos del inventario inicial incluido en el proyecto:
+- Modelos registrados: 21.
+- Unidades por modelo: 100 en S + 100 en M + 100 en L + 100 en XL = 400.
+- Unidades totales: 21 × 400 = 8,400.
+- Unidades por talla: 2,100 en S, 2,100 en M, 2,100 en L y 2,100 en XL.
+- Productos con poco stock: se calcula dinámicamente según las existencias guardadas y el umbral configurado.
+
+Si el administrador modifica el catálogo o las existencias, los indicadores reflejarán las cantidades actuales guardadas en el inventario.
