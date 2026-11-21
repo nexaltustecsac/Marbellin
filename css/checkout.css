@@ -1,0 +1,266 @@
+.checkout-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch; 
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 2rem;
+    padding: 0 1rem;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Formulario Pasos */
+.checkout-wrapper .formulario-pasos {
+    flex: 1 1 65%;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    height: 950px;
+    min-height: 950px;
+    max-height: 950px;
+    overflow: hidden; 
+}
+
+/* Resumen */
+.checkout-wrapper .formulario-resumen {
+    flex: 1 1 30%;
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 750px;
+    min-height: 750px;
+    max-height: 750px;
+}
+
+/* Scroll */
+.checkout-wrapper .formulario-resumen .formulario-contenido {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0; 
+}
+
+.checkout-wrapper .formulario-resumen h2 {
+    margin-bottom: 1.4rem;
+    font-size: 1.2rem;
+    color: #c94c8c;
+    font-weight: 750;
+   font-family: 'Playfair Display', serif;
+   text-transform: uppercase;
+    text-align: center;
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;    
+    margin-bottom: 0rem;
+    box-sizing: border-box;
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ff69b4 #f1f1f1;
+    padding-right: 0; 
+    margin-right: 0;  
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen::-webkit-scrollbar {
+    width: 2.5px; 
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 1.5px;
+}
+
+.checkout-wrapper .formulario-resumen #listaResumen::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 1.5px;
+}
+
+.checkout-wrapper .formulario-resumen .formulario-total {
+    margin-top: auto;
+    padding-top: 0.8rem;
+    border-top: 1px solid #eee;
+    text-align: center; 
+    font-weight: 750;
+}
+
+/* Imagen */
+.checkout-wrapper .item-resumen {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 0.6px solid #eee;
+    padding-bottom: 0rem;
+    align-items: center;
+}
+
+.checkout-wrapper .item-resumen img {
+    width: 86px;
+    height: 86px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.checkout-wrapper .item-resumen p {
+    margin: 0.25rem 0;
+    font-size: 0.86rem;
+    text-align: center;
+    flex: 1;
+}
+
+/* Paso 1*/
+.checkout-wrapper .formulario-paso h1 {
+    margin-bottom: 1.4rem;
+    font-size: 1.2rem;
+    color: #c94c8c;
+    text-align: center;
+    margin-bottom: 1rem;
+     font-weight: 750;
+   text-transform: uppercase;
+ font-family: 'Playfair Display', serif;
+}
+
+.checkout-wrapper .acceso-cliente {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.checkout-wrapper .acceso-cliente a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.checkout-wrapper .acceso-cliente a:hover {
+    color: #ff1493;
+    text-decoration: underline;
+}
+
+/* Ocultar si el usuario está logueado */
+.checkout-wrapper .acceso-cliente.logueado {
+    display: none;
+}
+
+.checkout-wrapper input,
+.checkout-wrapper textarea,
+.checkout-wrapper select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-top: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.checkout-wrapper input:focus,
+.checkout-wrapper textarea:focus,
+.checkout-wrapper select:focus {
+    border-color: #ff69b4;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.2);
+}
+
+.checkout-wrapper button {
+    width: 50%; /* Cada botón ocupa la mitad del contenedor */
+    padding: 0.95rem 1rem; /* Ajusta el padding interno de manera proporcional */
+    border: none;
+    background-color: #ff69b4;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+    margin: 0.8rem 0; /* Márgenes arriba y abajo */
+    box-sizing: border-box; /* Asegura que width incluya padding y border */
+}
+
+.checkout-wrapper button:hover {
+    background-color: #ff1493;
+    transform: translateY(-2px);
+}
+
+.checkout-wrapper .input-error {
+    border-color: red !important;
+    background-color: #ffe5e5;
+}
+
+/* =======================
+   Responsive
+======================= */
+@media (max-width: 768px) {
+    .checkout-wrapper {
+        flex-direction: column;
+    }
+
+    .checkout-wrapper .formulario-pasos,
+    .checkout-wrapper .formulario-resumen {
+        height: auto; 
+        min-height: auto;
+        max-height: none;
+    }
+
+    .checkout-wrapper .formulario-resumen #listaResumen {
+        overflow: visible;
+        max-height: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* 🌸 SweetAlert2 - Estilo Marbellin */
+.swal2-popup {
+  border-radius: 1.5rem !important;
+  background-color: #fff0f5 !important;
+  color: #c2185b !important;
+  box-shadow: 0 4px 20px rgba(194, 24, 91, 0.3) !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.swal2-title {
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  color: #c2185b !important;
+}
+
+.swal2-html-container {
+  font-size: 1rem !important;
+  color: #a2185b !important;
+}
+
+.swal2-confirm {
+  background-color: #e75480 !important;
+  color: #fff !important;
+  border-radius: 1rem !important;
+  padding: 0.6rem 1.5rem !important;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(231, 84, 128, 0.4);
+  transition: all 0.3s ease;
+}
+
+.swal2-confirm:hover {
+  background-color: #d94f7b !important;
+  transform: scale(1.05);
+}

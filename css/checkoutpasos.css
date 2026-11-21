@@ -1,0 +1,123 @@
+// main checkout.js
+
+import {
+  cargarDatosCliente,
+  mostrarResumenPedido,
+  validarCamposCliente,
+  limpiarDatosTempCliente
+} from './checkout.js';
+
+import {
+  inicializarCheckoutPasos,
+  mostrarPaso,
+  limpiarCamposCliente as limpiarCamposPaso,
+  validarPaso2,
+  toggleEntrega
+} from './checkoutpasos.js';
+
+import { generarBoletaPDF } from './generarBoleta.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // -------------------------
+  // Inicializar pasos y botones
+  // -------------------------
+  inicializarCheckoutPasos();
+
+  // -------------------------  
+  // Cargar cliente y resumen del pedido  
+  // -------------------------  
+  mostrarResumenPedido();  
+  cargarDatosCliente();  
+
+  // -------------------------  
+  // Imagen de tienda y dirección dinámica  
+  // -------------------------  
+  const tiendaSelect = document.getElementById("tiendaSeleccionada");  
+  const contImagenTienda = document.getElementById("imagenTienda");  
+  const direccionTienda = document.getElementById("direccionTienda");  
+
+  const direccionesTienda = {  
+      "tienda1": "Jr. América 325, La Victoria.",  
+      "tienda2": "Jr. Hipólito Unanue 1457, La Victoria. A una cuadra del Parque Cánepa, toldo color negro, cruzando la Av. Huánuco."  
+  };  
+
+  tiendaSelect?.addEventListener("change", () => {  
+      const valor = tiendaSelect.value;  
+      contImagenTienda.innerHTML = "";  
+
+      if (!valor) {  
+          direccionTienda.textContent = "";  
+          return;  
+      }  
+
+      // Imagen de la tienda según selección  
+      const img = document.createElement("img");  
+      img.src = valor === "tienda1"   
+          ? "../assets/img/tienda/tienda1.jpg"   
+          : "../assets/img/tienda/tienda2.jpg";  
+      img.alt = "Imagen de la tienda seleccionada";  
+      contImagenTienda.appendChild(img);  
+
+      // Dirección dinámica  
+      direccionTienda.textContent = direccionesTienda[valor] || "";  
+  });  
+
+  // -------------------------  
+  // Toggle Delivery / Recojo en tienda
+  // -------------------------
+  const btnDelivery = document.getElementById("btn-delivery");
+  const btnTienda = document.getElementById("btn-tienda");
+
+  btnDelivery?.addEventListener("click", () => toggleEntrega("delivery"));
+  btnTienda?.addEventListener("click", () => toggleEntrega("tienda"));
+
+  // -------------------------  
+  // Navegación de pasos con validación centralizada  
+  // -------------------------  
+  const siguienteInicial = document.getElementById("siguiente-inicial");  
+  const siguiente2 = document.getElementById("siguiente-2");  
+  const anterior2 = document.getElementById("anterior-2");  
+  const anterior3 = document.getElementById("anterior-3");  
+
+  siguienteInicial?.addEventListener("click", () => {  
+      if (!validarCamposCliente()) {
+          alert("Por favor completa correctamente los campos de usuario.");
+          return;
+      }
+      mostrarPaso(1); // Paso 2: método de entrega  
+  });  
+
+  siguiente2?.addEventListener("click", () => {  
+      if (!validarPaso2()) return; // Validación paso 2 centralizada
+      mostrarPaso(2); // Paso 3: confirmación  
+  });  
+
+  anterior2?.addEventListener("click", () => mostrarPaso(0));  
+  anterior3?.addEventListener("click", () => mostrarPaso(1));  
+
+  // -------------------------  
+  // Formulario final (Paso 3)  
+  // -------------------------  
+  const paso3Form = document.getElementById("paso3");  
+  paso3Form?.addEventListener("submit", e => {  
+      e.preventDefault();  
+      const checkbox = paso3Form.querySelector("input[type='checkbox']");  
+      if (!checkbox.checked) {
+          alert("Debes aceptar los términos y condiciones.");
+          return;
+      }  
+
+      generarBoletaPDF();  
+      alert("¡Pedido finalizado! Se generó la boleta.");  
+
+      mostrarPaso(0);  
+      limpiarDatosTempCliente();  
+  });  
+
+  // -------------------------  
+  // Botón Limpiar Paso 1  
+  // -------------------------  
+  document.getElementById("limpiar-datos")?.addEventListener("click", limpiarCamposPaso);
+
+});
