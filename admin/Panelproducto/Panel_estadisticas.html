@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c2185b">
+  <title>Estadísticas | Marbellín Administración</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;
+    padding:24px;background:linear-gradient(145deg,#fff2f7,#fffafd 55%,#fceaf2);
+    color:#29232a;font:500 16px Arial,sans-serif}main{width:min(440px,100%);padding:32px;
+    background:#fff;border:1px solid #f0dce5;border-radius:20px;box-shadow:0 12px 40px #8b315514;
+    text-align:center}h1{color:#c2185b;font-size:24px}p{line-height:1.6;color:#766c73}
+    a{display:inline-block;margin-top:12px;padding:12px 20px;border-radius:10px;
+    background:#c2185b;color:white;text-decoration:none}
+  </style>
+  <link rel="stylesheet" href="../css/Panel_estadisticas.css">
+</head>
+<body>
+  <main>
+    <h1>Estadísticas</h1>
+    <p>Abriendo el módulo de estadísticas del panel administrativo de Marbellín…</p>
+    <a href="Panel_dashboard.html?panel=estadisticas">Abrir módulo</a>
+  </main>
+  <script>
+    (function(){
+      const destino = "Panel_dashboard.html?panel=estadisticas";
+      window.location.replace(destino);
+    })();
+  </script>
+  <script src="../js/Panel_estadisticas.js" defer></script>
+</body>
+</html>
