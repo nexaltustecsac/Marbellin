@@ -1,0 +1,281 @@
+
+/* =============================
+   FILA SUPERIOR
+============================= */
+.fila-superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 15px;
+}
+
+#logo {
+  height: 60px;
+}
+
+/* =============================
+   ICONOS
+============================= */
+.iconos {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+/* Iconos generales */
+.icono-usuario, .icono-carrito, .icono-hamburguesa {
+  font-size: 28px;
+  cursor: pointer;
+  color: #000;
+  transition: 0.3s;
+}
+
+.icono-usuario:hover, .icono-carrito:hover, .icono-hamburguesa:hover {
+  color: #c70039;
+}
+
+/* =============================
+   MENÚ HAMBURGUESA
+============================= */
+.icono-hamburguesa {
+  display: none; /* oculto en escritorio */
+  font-size: 28px;
+  cursor: pointer;
+  color: #000;
+  transition: 0.3s;
+}
+
+.icono-hamburguesa:hover {
+  color: #c70039;
+}
+
+
+/* =============================
+   MÓDULO RESPONSIVO PARA MÓVILES
+============================= */
+@media screen and (max-width: 768px) {
+    
+  /* FILA SUPERIOR */
+  .fila-superior {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  #logo {
+    max-width: 160px;
+    height: auto;
+  }
+
+  /* ICONOS */
+  .iconos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 12px;
+  }
+
+  .iconos i,
+  .iconos a {
+    font-size: 30px;
+    color: #000;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+
+  .iconos i:hover,
+  .iconos a:hover {
+    color: #333;
+    transform: scale(1.05);
+  }
+
+  /* ICONO HAMBURGUESA */
+  .icono-hamburguesa {
+    display: block;
+    font-size: 28px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .icono-hamburguesa:active {
+    transform: scale(0.95);
+  }
+    
+  /* MENÚ DE NAVEGACIÓN MÓVIL */
+  nav {
+    width: 100%;
+  }
+
+  .menu-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #ffe6f0;
+    border-top: 1px solid #f8cdd9;
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .menu-nav.show {
+    display: flex;
+  }
+
+  .menu-nav li {
+    text-align: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #f4c2d7;
+    line-height: 1.2;
+    position: relative;
+  }
+
+  .menu-nav li a {
+    color: #d81b60;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    display: block;
+    padding: 6px 0;
+    transition: background-color 0.3s;
+  }
+
+  /* DROPDOWN */
+  .dropdown > a::after {
+    content: ' ▼';
+    font-size: 11px;
+  }
+
+  .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #fff0f5;
+    padding: 4px 0;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    animation: slideDown 0.3s ease-in-out;
+  }
+  
+ .dropdown.open .dropdown-menu,
+  .dropdown-menu.show {
+    display: flex;
+  }
+  
+  
+  /* =============================
+   MENÚ USUARIO - MÓVIL
+============================= */
+.menu-usuario {
+  position: relative;
+  top: auto;
+  right: auto;
+  transform: none;
+  width: 100%;
+  display: none;
+  background: #fde4ec;
+  border: 1px solid #f8bbd0;
+  border-radius: 10px;
+  padding: 10px 0;
+  z-index: 1000;
+  text-align: center; /* Centramos el contenido */
+  font-size: 1rem; /* Misma medida para todas las letras */
+  font-family: 'Playfair Display', sans-serif; /* Fuente uniforme */
+}
+
+.menu-usuario.show {
+  display: block;
+}
+
+.menu-usuario li {
+  list-style: none; /* Eliminamos viñetas */
+}
+
+/* Enlaces y botones del menú */
+.menu-usuario li a,
+.menu-usuario li button {
+  width: 90%;
+  margin: 0.3rem auto;
+  text-align: center;
+  display: block;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #f8bbd0;
+  background: #fde4ec;
+  color: #880e4f;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  font-family: 'Playfair Display', sans-serif;
+}
+
+.menu-usuario li a:hover,
+.menu-usuario li button:hover {
+  background: #f8bbd0;
+  transform: scale(1.05);
+}
+  
+/* Mensaje de bienvenida */
+.menu-usuario li p {
+  margin: 0 1rem 0.5rem;
+  font-size: 1rem;
+  color: #555; /* color base del texto */
+  line-height: 1.4;
+  font-family: 'Playfair Display', sans-serif;
+}
+  
+/* Nombre + Apellido y Distribuidora */
+.menu-usuario .nombre-usuario,
+.menu-usuario .distribuidora {
+  color: #880e4f;     /* Color especial */
+  font-weight: 700;   /* Un poco más grueso */
+}
+  
+  /* BÚSQUEDA */
+  .busqueda {
+    display: block;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .busqueda input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f8b3c9;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+  }
+
+  .busqueda button {
+    margin-top: 8px;
+    width: 100%;
+    background-color: #f06292;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .busqueda button:hover {
+    background-color: #ec407a;
+  }
+
+  /* ANIMACIONES */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+  }
+}

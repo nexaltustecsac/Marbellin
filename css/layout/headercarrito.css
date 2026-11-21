@@ -1,0 +1,269 @@
+/* =============================
+   Icono carrito
+============================= */
+.icono-carrito {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #000;
+    transition: color 0.3s ease, transform 0.2s ease;
+    border: none;
+}
+
+.icono-carrito:hover {
+    color: #333;
+    transform: scale(1.05);
+}
+
+.icono-carrito:active {
+    color: #880e4f;
+    transform: scale(1.05);
+}
+
+/* =============================
+   Mini carrito – escritorio y móvil
+============================= */
+.mini-carrito {
+    position: fixed;
+    top: 0;
+    right: 0;
+    max-width: 380px;      /* ancho máximo en escritorio */
+    width: 100%;           /* se adapta en móvil */
+    height: 100%;          /* ocupa todo el alto disponible */
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 9999;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    overflow: hidden;      /* evita desbordes generales */
+}
+
+.mini-carrito.mostrar {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =============================
+   Título del carrito
+============================= */
+.titulo-carrito {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 10px 0 15px;
+    color: #880e4f;
+    border-bottom: 1px solid #f8bbd0;
+    padding-bottom: 8px;
+    flex-shrink: 0; /* evita que se encoja */
+}
+
+/* =============================
+   Botón cerrar
+============================= */
+.cerrar-carrito {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #880e4f;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.cerrar-carrito:hover {
+    color: #c70039;
+    transform: scale(1.2);
+}
+
+/* =============================
+   Lista del carrito – productos
+============================= */
+.lista-carrito {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1; /* ocupa espacio flexible */
+    overflow-y: auto; /* solo la lista hace scroll */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: calc(100vh - 220px); /* deja espacio para subtotal y botones */
+}
+
+.lista-carrito li {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    color: #880e4f;
+    font-size: 0.95rem;
+}
+
+/* Fila principal */
+.fila-principal {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.fila-principal .imagen img {
+    width: 107px;
+    height: 107px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.fila-principal .nombre {
+    flex: 1;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+/* Fila secundaria */
+.fila-secundaria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.fila-secundaria .cantidad,
+.fila-secundaria .precio {
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    border: none;
+}
+
+/* Botón eliminar producto */
+.btn-eliminar {
+    background-color: #fff;
+    border: none;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-eliminar svg {
+    width: 18px;
+    height: 18px;
+    stroke: #880e4f;
+    transition: stroke 0.2s ease;
+}
+
+.btn-eliminar:hover svg {
+    stroke: #c70039;
+}
+
+.btn-eliminar:active svg {
+    stroke: #ff3366;
+}
+
+/* =============================
+   Subtotal general
+============================= */
+.subtotal-general {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 12px 0;
+    padding-top: 10px;
+    border-top: 1px solid #f8bbd0;
+    color: #880e4f;
+    flex-shrink: 0; /* fijo al fondo */
+    background: #fff;
+}
+
+/* =============================
+   Botones de acción
+============================= */
+.acciones-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-top: 10px;
+    flex-shrink: 0; /* evita que se encoja */
+    background: #fff;
+}
+
+.acciones-carrito button {
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #c70039;
+    color: #fff;
+    width: 90%;
+    transition: all 0.3s ease;
+}
+
+.acciones-carrito button:hover {
+    background-color: #a3002d;
+    transform: scale(1.05);
+}
+
+/* =============================
+   Responsive – móviles
+============================= */
+@media screen and (max-width: 768px) {
+    .mini-carrito {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .fila-principal .imagen img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .fila-principal .nombre {
+        font-size: 1rem;
+    }
+
+    .fila-secundaria {
+        gap: 15px;
+    }
+
+    .fila-secundaria .cantidad,
+    .fila-secundaria .precio {
+        font-size: 0.95rem;
+    }
+
+    .btn-eliminar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .acciones-carrito button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .cerrar-carrito {
+        font-size: 26px;
+    }
+}

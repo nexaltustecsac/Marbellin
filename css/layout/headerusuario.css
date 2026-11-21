@@ -1,0 +1,135 @@
+/* =============================
+   CONTENEDOR ICONO USUARIO
+============================= */
+.contenedor-usuario-hover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 250;
+}
+
+/* Icono de usuario */
+.icono-usuario {
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.icono-usuario:hover {
+  color: #d81b60;
+}
+
+/* =============================
+   MENÚ USUARIO - ESCRITORIO
+============================= */
+@media (min-width: 769px) {
+  .menu-usuario {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #f8bbd0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 0.5rem 0.3rem;
+    width: 190px;        /* ancho uniforme */
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 1000;
+  }
+
+  .menu-usuario.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .menu-usuario li {
+    text-align: center;
+    margin: 0.25rem 0;
+  }
+
+  .menu-usuario li p {
+    margin: 0.3rem 0;
+    font-size: 0.75rem;
+    color: #555;
+    line-height: 1.2;
+    padding: 0 0.3rem;
+  }
+
+  
+
+  /* =============================
+     BOTONES Y ENLACES INTERNOS
+  ============================= */
+  .menu-usuario li a,
+  .menu-usuario li button,
+  .menu-usuario li .btn-menu-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;       /* ancho uniforme */
+    height: 20px;       /* altura reducida */
+    padding: 0 0.4rem;
+    margin: 0.15rem auto;
+    font-size: 0.65rem; /* texto reducido */
+    font-weight: 600;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #f8bbd0;
+    background: #fde4ec;
+    color: #880e4f;
+    transition: background 0.25s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .menu-usuario li a:hover,
+  .menu-usuario li button:hover,
+  .menu-usuario li .btn-menu-login:hover {
+    background: #f8bbd0;
+    transform: scale(1.05);
+  }
+
+  /* =============================
+     BOTÓN INICIAR SESIÓN FUERA DE MENÚ (SOLO ESCRITORIO)
+  ============================= */
+  .btn-menu-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;       
+    height: 20px;       /* altura reducida */
+    padding: 0 0.4rem;
+    margin: 0.15rem auto;
+    font-size: 0.65rem; /* texto reducido */
+    font-weight: 600;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #f8bbd0;
+    background: #fde4ec;
+    color: #880e4f;
+    transition: background 0.25s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-menu-login:hover {
+    background: #f8bbd0;
+    transform: scale(1.05);
+  }
+}
+
+/* Nombre + Apellido y Distribuidora */
+.menu-usuario .nombre-usuario,
+.menu-usuario .distribuidora {
+  color: #880e4f;     /* Color especial */
+  font-weight: 700;   /* Un poco más grueso */
+}

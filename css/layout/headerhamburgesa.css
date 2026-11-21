@@ -1,0 +1,100 @@
+/* =============================
+   MENÚ PRINCIPAL
+============================= */
+
+/* Enlaces del menú */
+.menu-nav a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #8a004f;
+    padding: 6px 16px;
+    border-radius: 30px;
+    transition: color 0.3s, background-color 0.3s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* centra el texto dentro */
+}
+
+/* Hover y focus */
+.menu-nav a:hover,
+.menu-nav a:focus {
+    color: #ec0a8e;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    list-style: none;
+    background-color: #f8bbd0;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    text-align: center; /* centra los elementos internos */
+}
+
+/* =============================
+   VISTA ESCRITORIO (≥768px)
+============================= */
+@media (min-width: 768px) {
+    /* Contenedor inferior del menú */
+    .fila-inferior {
+        display: flex;
+        justify-content: center; /* centra todo el menú */
+        align-items: center;
+        gap: 4rem;
+        margin: 0 auto;
+        padding: 0.5rem;
+        background-color: #f1a8b9;
+    }
+
+    /* Lista del menú */
+    .menu-nav {
+        display: flex;
+        flex-direction: row;
+        font-family: 'Playfair Display', sans-serif;
+        font-size: 16px;
+        list-style: none;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        justify-content: center; /* centra la lista */
+        align-items: center;
+    }
+
+    /* Dropdown oculto por defecto */
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px); /* centrado debajo del botón */
+        min-width: 160px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Mostrar al pasar el mouse */
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* Links dentro del dropdown */
+    .dropdown-menu li a {
+        color: #000;
+        font-weight: bold;
+        display: block;
+        text-align: center;
+        padding: 6px 10px;
+    }
+
+    .dropdown-menu li a:hover {
+        color: #ec0a8e;
+    }
+}
